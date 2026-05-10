@@ -1,26 +1,195 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --cream: #FDFAF6;
+    --stone: #F5F2EE;
+    --ink: #0A0908;
+    --warm-grey: #5C5550;
+    --gold: #C9974A;
+    --border: #CCC8C0;
+    --sage: #4A6A58;
+    --rust: #8B3A2A;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@theme inline {
+  --color-cream: #FDFAF6;
+  --color-stone: #F5F2EE;
+  --color-ink: #0A0908;
+  --color-warm-grey: #5C5550;
+  --color-gold: #C9974A;
+  --color-border: #CCC8C0;
+  --color-sage: #4A6A58;
+  --color-rust: #8B3A2A;
+  --color-background: #FDFAF6;
+  --color-foreground: #0A0908;
+  --font-sans: var(--font-dm-sans);
+  --font-mono: var(--font-dm-mono);
+  --font-serif: var(--font-cormorant);
 }
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #FDFAF6;
+  color: #0A0908;
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-serif {
+  font-family: var(--font-cormorant), Georgia, serif;
+}
+
+.font-mono {
+  font-family: var(--font-dm-mono), monospace;
+}
+
+/* Skeleton shimmer */
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #F5F2EE 25%,
+    #EDE9E4 50%,
+    #F5F2EE 75%
+  );
+  background-size: 1000px 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Gold button glow */
+.btn-gold {
+  background: #C9974A;
+  color: #FDFAF6;
+  transition: all 0.2s ease;
+}
+
+.btn-gold:hover {
+  background: #B8863B;
+  box-shadow: 0 4px 20px rgba(201, 151, 74, 0.35);
+  transform: translateY(-1px);
+}
+
+/* Card hover */
+.recommendation-card {
+  transition: all 0.25s ease;
+}
+
+.recommendation-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(10, 9, 8, 0.12);
+}
+
+/* Fade in up */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.animate-delay-100 { animation-delay: 0.1s; opacity: 0; }
+.animate-delay-200 { animation-delay: 0.2s; opacity: 0; }
+.animate-delay-300 { animation-delay: 0.3s; opacity: 0; }
+.animate-delay-400 { animation-delay: 0.4s; opacity: 0; }
+.animate-delay-500 { animation-delay: 0.5s; opacity: 0; }
+
+/* Progress bar */
+.progress-bar {
+  height: 4px;
+  background: #CCC8C0;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #C9974A;
+  border-radius: 2px;
+  transition: width 0.5s ease;
+}
+
+/* Range input styling */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 2px;
+  outline: none;
+  cursor: pointer;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #C9974A;
+  cursor: pointer;
+  border: 2px solid #FDFAF6;
+  box-shadow: 0 2px 8px rgba(201, 151, 74, 0.4);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.15);
+  box-shadow: 0 4px 16px rgba(201, 151, 74, 0.5);
+}
+
+input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #C9974A;
+  cursor: pointer;
+  border: 2px solid #FDFAF6;
+  box-shadow: 0 2px 8px rgba(201, 151, 74, 0.4);
+}
+
+/* Three.js canvas overlay */
+canvas {
+  display: block;
+}
+
+/* Scrollbar hide utility */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Card entrance stagger */
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card-enter {
+  animation: cardIn 0.45s ease forwards;
+}
+
