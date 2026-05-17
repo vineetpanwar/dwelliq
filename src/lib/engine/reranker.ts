@@ -81,7 +81,11 @@ function toPick(role: "A" | "B" | "C", c: Candidate, budget: number, kind: "in-b
 
 function rationale(p: Product, budget: number, kind: "in-budget" | "stretch" | "local"): string {
   if (kind === "in-budget") {
-    return `Comfortably within budget at $${p.price}. ${p.rating}/5 rated — a confident, no-regrets pick.`;
+    if (p.price <= budget) {
+      return `Comfortably within budget at $${p.price}. ${p.rating}/5 rated — a confident, no-regrets pick.`;
+    }
+    // Fallback case: A slot couldn't find an in-budget candidate, so it's showing the best match overall.
+    return `Best style match we found at $${p.price} — slightly over your target, but most aligned with the room.`;
   }
   if (kind === "stretch") {
     const over = p.price - budget;

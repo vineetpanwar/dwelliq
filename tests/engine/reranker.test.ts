@@ -86,4 +86,14 @@ describe("RuleBasedReranker", () => {
   it("providerName is 'rule-based'", () => {
     expect(reranker.providerName).toBe("rule-based");
   });
+
+  it("A rationale adapts when all candidates are over-budget", async () => {
+    const candidates = [
+      candidate(product({ id: "over-1", price: 1500, qualityTier: "premium" })),
+      candidate(product({ id: "over-2", price: 1300, qualityTier: "premium" })),
+    ];
+    const result = await reranker.rerank({ ...baseInput, candidates });
+    expect(result.picks[0].rationale).not.toContain("Comfortably within budget");
+    expect(result.picks[0].rationale).toContain("over your target");
+  });
 });
