@@ -66,4 +66,4 @@ npm run dev &                                                            # in an
 E2E_BASE_URL=http://localhost:3000 npx vitest run tests/e2e/happy-path.test.ts
 ```
 
-See `~/Desktop/TUM/docs/superpowers/plans/2026-05-17-dwelliq-backend-foundation.md` for the implementation plan and `~/Desktop/TUM/docs/superpowers/specs/2026-05-16-dwelliq-mobile-app-design.md` for the design spec.
+The implementation plan and design spec live alongside this repo (see the parent workspace `docs/superpowers/{specs,plans}/`).

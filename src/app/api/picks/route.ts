@@ -83,12 +83,16 @@ export async function POST(request: Request) {
     return Response.json({ error: "Could not persist picks" }, { status: 500 });
   }
 
-  await db.from("telemetry_pairs").upsert({
+  const { error: telErr } = await db.from("telemetry_pairs").upsert({
     pick_set_id: pickSetId,
     swipe_path: [],
     inpaint_seen: [],
     filter_changes: [],
   }, { onConflict: "pick_set_id" });
+  if (telErr) {
+    console.warn("[picks] telemetry shell write failed:", telErr.message);
+    // non-fatal — picks response still returned
+  }
 
   return Response.json(pickSet);
 }

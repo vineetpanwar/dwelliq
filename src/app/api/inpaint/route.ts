@@ -30,19 +30,23 @@ export async function POST(request: Request) {
   const photoUrl = pub.publicUrl;
 
   const picks = row.results as Pick[];
-  const skus = picks.map(p => p.role);                 // 'A', 'B', 'C'
+  const roles = picks.map(p => p.role);   // 'A' | 'B' | 'C'
 
-  // Plan 1 stub: returns photoUrl for each role. Plan 3 calls Gemini per pick.
-  const results = await runInpaintStubs(photoUrl, skus);
+  // Plan 1 stub: returns photoUrl keyed by role. Plan 3 will key by actual SKU.
+  const results = await runInpaintStubs(photoUrl, roles);
 
   // Write into the columns. Use a 50ms delay so the GET /api/picks/[id]
   // streaming UX in mobile (Plan 2) has something to observe.
   await new Promise(r => setTimeout(r, 50));
-  await db.from("picks").update({
+  const { error: updateErr } = await db.from("picks").update({
     mood_a_url: results["A"] ?? null,
     mood_b_url: results["B"] ?? null,
     mood_c_url: results["C"] ?? null,
   }).eq("id", body.pick_set_id);
+  if (updateErr) {
+    console.warn("[inpaint] mood-url update failed:", updateErr.message);
+    // non-fatal — caller still gets ok:true; GET /api/picks/[id] will reflect nulls
+  }
 
-  return Response.json({ ok: true, jobs: skus.map(s => ({ role: s, status: "done" })) });
+  return Response.json({ ok: true, jobs: roles.map(r => ({ role: r, status: "done" })) });
 }
