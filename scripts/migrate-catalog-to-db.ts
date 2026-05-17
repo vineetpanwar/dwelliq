@@ -1,8 +1,12 @@
 import { CATALOG } from "../src/lib/catalog";
 import { createClient } from "@supabase/supabase-js";
 
-const url = process.env.NEXT_PUBLIC_SUPABASE_URL!;
-const key = process.env.SUPABASE_SERVICE_ROLE_KEY!;
+const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
+const key = process.env.SUPABASE_SERVICE_ROLE_KEY;
+if (!url || !key) {
+  console.error("[seed-catalog] missing NEXT_PUBLIC_SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY");
+  process.exit(1);
+}
 const db = createClient(url, key);
 
 async function main() {
@@ -31,4 +35,7 @@ async function main() {
   console.log(`[seed-catalog] upserted ${rows.length} rows`);
 }
 
-main();
+main().catch((err) => {
+  console.error("[seed-catalog] unexpected error:", err);
+  process.exit(1);
+});
