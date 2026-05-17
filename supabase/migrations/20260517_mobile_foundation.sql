@@ -81,3 +81,33 @@ alter table catalog          enable row level security;
 alter table vision_features  enable row level security;
 alter table picks            enable row level security;
 alter table telemetry_pairs  enable row level security;
+
+-- 6. RPC: match_catalog — cosine ANN + filters, returns top-K
+create or replace function match_catalog(
+  query_embedding vector(768),
+  p_category      text default null,
+  p_price_max     numeric default null,
+  p_local_only    boolean default false,
+  match_count     int default 30
+)
+returns table (
+  id text, name text, category text, retailer text, price numeric,
+  image_url text, affiliate_url text, styles text[], household_suit text[],
+  rating numeric, is_local boolean, local_distance numeric, quality_tier text,
+  similarity float
+)
+language sql stable
+as $$
+  select
+    c.id, c.name, c.category, c.retailer, c.price,
+    c.image_url, c.affiliate_url, c.styles, c.household_suit,
+    c.rating, c.is_local, c.local_distance, c.quality_tier,
+    1 - (c.embedding <=> query_embedding) as similarity
+  from catalog c
+  where c.embedding is not null
+    and (p_category   is null or c.category = p_category)
+    and (p_price_max  is null or c.price   <= p_price_max)
+    and (p_local_only = false or c.is_local = true)
+  order by c.embedding <=> query_embedding
+  limit match_count
+$$;
