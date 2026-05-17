@@ -34,3 +34,45 @@ export type RoomSession = {
   created_at: string;
   last_accessed_at: string;
 };
+
+export type VisionFeaturesRow = {
+  photo_id: string;
+  session_id: string | null;
+  bbox: number[] | null;
+  mask_url: string | null;
+  depth_scale_cm: number | null;
+  palette: string[];
+  light_temp: "warm" | "neutral" | "cool" | null;
+  clip_embedding: number[] | null;
+  created_at: string;
+};
+
+export type PicksRow = {
+  id: string;
+  photo_id: string | null;
+  session_id: string | null;
+  user_id: string | null;
+  query: string;
+  brief: Record<string, unknown>;
+  candidates: string[];
+  results: unknown;
+  mood_a_url: string | null;
+  mood_b_url: string | null;
+  mood_c_url: string | null;
+  rerank_provider: string;
+  created_at: string;
+};
+
+export type TelemetryPairRow = {
+  id: string;
+  pick_set_id: string;
+  swipe_path: string[];
+  inpaint_seen: string[];
+  ar_opened_sku: string | null;
+  buy_clicked_sku: string | null;
+  filter_changes: unknown[];
+  session_duration_ms: number | null;
+  rerank_fallback: boolean;
+  created_at: string;
+  updated_at: string;
+};
