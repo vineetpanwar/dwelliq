@@ -1,23 +1,11 @@
-import Navbar from "@/components/landing/Navbar";
-import Hero from "@/components/landing/Hero";
-import HowItWorks from "@/components/landing/HowItWorks";
-import WhyDwelliq from "@/components/landing/WhyDwelliq";
-import PreviewSection from "@/components/landing/PreviewSection";
-import CtaSection from "@/components/landing/CtaSection";
-import Footer from "@/components/landing/Footer";
+import V6Landing from "@/components/v6/V6Landing";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Dwelliq — AI Interior Design for Homes & Apartments",
+  description: "AI-powered interior design with 7 styles, curated colour palettes, material libraries, and budget-matched furniture recommendations. Free for homeowners.",
+};
 
 export default function HomePage() {
-  return (
-    <>
-      <Navbar />
-      <main>
-        <Hero />
-        <HowItWorks />
-        <WhyDwelliq />
-        <PreviewSection />
-        <CtaSection />
-      </main>
-      <Footer />
-    </>
-  );
+  return <V6Landing />;
 }

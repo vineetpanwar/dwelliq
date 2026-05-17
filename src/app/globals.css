@@ -14,6 +14,7 @@
 }
 
 @theme inline {
+  --breakpoint-xs: 480px;
   --color-cream: #FDFAF6;
   --color-stone: #F5F2EE;
   --color-ink: #0A0908;
