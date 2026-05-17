@@ -40,6 +40,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      data-scroll-behavior="smooth"
       className={`${cormorant.variable} ${dmSans.variable} ${dmMono.variable} h-full`}
     >
       <body className="min-h-full flex flex-col bg-cream text-ink antialiased">
