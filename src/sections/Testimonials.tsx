@@ -19,16 +19,16 @@ export default function Testimonials() {
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
           <div style={{ opacity: v ? 1 : 0, transition: "opacity .5s" }}>
             <p className="text-[10px] font-semibold tracking-[.18em] uppercase text-[#C9974A] mb-3">Real results</p>
-            <h2 className="font-[var(--font-cormorant)] text-5xl sm:text-6xl font-light text-[#0A0908]">What they say.</h2>
+            <h2 className="font-[var(--font-cormorant)] text-5xl sm:text-6xl font-light text-[#1C1C1C]">What they say.</h2>
           </div>
-          <Link href="/design" className="hidden sm:flex items-center gap-2 text-sm text-[#5C5550] ul-link hover:text-[#0A0908] transition-colors" style={{ opacity: v ? 1 : 0, transition: "opacity .5s .1s" }}>
+          <Link href="/design" className="hidden sm:flex items-center gap-2 text-sm text-[#5A5A5A] ul-link hover:text-[#1C1C1C] transition-colors" style={{ opacity: v ? 1 : 0, transition: "opacity .5s .1s" }}>
             Join 24,000+ homeowners — it&apos;s free →
           </Link>
         </div>
 
         {/* Featured quote */}
-        <div className="bg-[#0A0908] rounded-3xl p-8 sm:p-12 lg:p-16 mb-5 relative overflow-hidden" style={{ opacity: v ? 1 : 0, transition: "opacity .5s .15s" }}>
-          <div className="absolute top-0 left-10 font-[var(--font-cormorant)] select-none pointer-events-none" style={{ fontSize: 160, lineHeight: 1, color: "rgba(201,151,74,0.07)" }}>&ldquo;</div>
+        <div className="bg-[#F0F0F0] rounded-3xl p-8 sm:p-12 lg:p-16 mb-5 relative overflow-hidden" style={{ opacity: v ? 1 : 0, transition: "opacity .5s .15s" }}>
+          <div className="absolute top-0 left-10 font-[var(--font-cormorant)] select-none pointer-events-none" style={{ fontSize: 160, lineHeight: 1, color: "rgba(201,151,74,0.14)" }}>&ldquo;</div>
           <div className="relative z-10 flex flex-col sm:flex-row gap-10 lg:gap-16 items-start">
             <div className="flex-1">
               <div className="flex gap-1 mb-6">
@@ -36,28 +36,28 @@ export default function Testimonials() {
                   <svg key={j} width="13" height="13" viewBox="0 0 13 13" fill="#C9974A"><path d="M6.5 1l1.4 2.8 3.1.5-2.3 2.2.6 3.1L6.5 8.1 3.7 9.6l.6-3.1L2 3.3l3.1-.5L6.5 1z"/></svg>
                 ))}
               </div>
-              <p className="font-[var(--font-cormorant)] text-2xl sm:text-[2rem] lg:text-[2.25rem] font-light text-[#FDFAF6] leading-[1.38] mb-8 italic">
+              <p className="font-[var(--font-cormorant)] text-2xl sm:text-[2rem] lg:text-[2.25rem] font-light text-[#1C1C1C] leading-[1.38] mb-8 italic">
                 &ldquo;{TESTIMONIALS[0].quote}&rdquo;
               </p>
               <div className="flex items-center gap-4">
-                <div className="w-11 h-11 rounded-full flex items-center justify-center text-xs font-bold text-[#FDFAF6] flex-shrink-0 ring-2 ring-white/10" style={{ background: TESTIMONIALS[0].color }}>
+                <div className="w-11 h-11 rounded-full flex items-center justify-center text-xs font-bold text-[#FDFAF6] flex-shrink-0 ring-2 ring-[#D9CEBC]" style={{ background: TESTIMONIALS[0].color }}>
                   {TESTIMONIALS[0].initials}
                 </div>
                 <div>
-                  <p className="text-[#FDFAF6] text-sm font-semibold">{TESTIMONIALS[0].name}</p>
-                  <p className="text-[#FDFAF6]/40 text-xs mt-0.5">{TESTIMONIALS[0].role}</p>
+                  <p className="text-[#1C1C1C] text-sm font-semibold">{TESTIMONIALS[0].name}</p>
+                  <p className="text-[#5A5A5A] text-xs mt-0.5">{TESTIMONIALS[0].role}</p>
                 </div>
               </div>
             </div>
             {TESTIMONIALS[0].saved && (
               <div className="hidden sm:flex flex-col gap-3 flex-shrink-0 min-w-[160px]">
-                <div className="text-center px-6 py-5 rounded-2xl border border-white/8 bg-white/3">
+                <div className="text-center px-6 py-5 rounded-2xl border border-[#D9CEBC] bg-[#FDFAF6]">
                   <p className="font-[var(--font-cormorant)] text-4xl text-[#C9974A] leading-none mb-2">{TESTIMONIALS[0].saved}</p>
-                  <p className="text-[9px] text-[#FDFAF6]/35 uppercase tracking-[.18em]">saved vs. designer</p>
+                  <p className="text-[9px] text-[#707070] uppercase tracking-[.18em]">saved vs. designer</p>
                 </div>
-                <div className="text-center px-6 py-5 rounded-2xl border border-white/8 bg-white/3">
-                  <p className="font-[var(--font-cormorant)] text-4xl text-[#FDFAF6] leading-none mb-2">3</p>
-                  <p className="text-[9px] text-[#FDFAF6]/35 uppercase tracking-[.18em]">rooms, one budget</p>
+                <div className="text-center px-6 py-5 rounded-2xl border border-[#D9CEBC] bg-[#FDFAF6]">
+                  <p className="font-[var(--font-cormorant)] text-4xl text-[#1C1C1C] leading-none mb-2">3</p>
+                  <p className="text-[9px] text-[#707070] uppercase tracking-[.18em]">rooms, one budget</p>
                 </div>
               </div>
             )}
@@ -73,12 +73,12 @@ export default function Testimonials() {
                   <svg key={j} width="11" height="11" viewBox="0 0 11 11" fill="#C9974A"><path d="M5.5 1l1.2 2.4L9.5 4 7.5 6l.4 2.7L5.5 7.4 3.1 8.7l.4-2.7L1.5 4l2.8-.6L5.5 1z"/></svg>
                 ))}
               </div>
-              <p className="font-[var(--font-cormorant)] text-[1.15rem] font-light text-[#0A0908] leading-[1.55] mb-6 italic">&ldquo;{t.quote}&rdquo;</p>
+              <p className="font-[var(--font-cormorant)] text-[1.15rem] font-light text-[#1C1C1C] leading-[1.55] mb-6 italic">&ldquo;{t.quote}&rdquo;</p>
               <div className="flex items-center gap-3 pt-4 border-t border-[#EAE6DF]">
                 <div className="w-9 h-9 rounded-full flex items-center justify-center text-xs font-bold text-[#FDFAF6] flex-shrink-0" style={{ background: t.color }}>{t.initials}</div>
                 <div>
-                  <p className="text-[#0A0908] text-sm font-semibold leading-none">{t.name}</p>
-                  <p className="text-[#9C948C] text-xs mt-1">{t.role}</p>
+                  <p className="text-[#1C1C1C] text-sm font-semibold leading-none">{t.name}</p>
+                  <p className="text-xs mt-1" style={{ color: C.light }}>{t.role}</p>
                 </div>
               </div>
             </div>

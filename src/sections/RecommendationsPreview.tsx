@@ -28,7 +28,7 @@ export default function RecommendationsPreview() {
             <p className="font-[var(--font-cormorant)] text-xl font-light">Rivera Apartment — 3 rooms</p>
             <span className="text-[10px] font-semibold bg-[#C9974A]/15 text-[#C9974A] px-3 py-1 rounded-full">Balanced · $4,200</span>
             <div className="ml-auto flex-1 max-w-[200px]">
-              <div className="flex justify-between text-[10px] text-[#9C948C] mb-1"><span>Budget used</span><span>72%</span></div>
+              <div className="flex justify-between text-[10px] mb-1" style={{ color: C.light }}><span>Budget used</span><span>72%</span></div>
               <div className="h-1.5 bg-[#EAE6DF] rounded-full overflow-hidden">
                 <div className="h-full rounded-full bg-[#C9974A]" style={{ width: "72%" }} />
               </div>
@@ -45,7 +45,7 @@ export default function RecommendationsPreview() {
                   {pkg.label === "Balanced" && <span className="text-[9px] font-semibold bg-[#C9974A] text-[#0A0908] px-2 py-0.5 rounded-full">Recommended</span>}
                 </div>
                 <p className="font-[var(--font-cormorant)] text-2xl text-[#0A0908] mb-1">{pkg.desc.split(" ")[0]}</p>
-                <p className="text-[11px] text-[#9C948C]">{pkg.desc.split("—")[1]?.trim()}</p>
+                <p className="text-[11px]" style={{ color: C.light }}>{pkg.desc.split("—")[1]?.trim()}</p>
                 <div className="mt-3 h-1 bg-[#EAE6DF] rounded-full overflow-hidden">
                   <div className="h-full rounded-full" style={{ width: `${pkg.pct}%`, background: pkg.color }} />
                 </div>
@@ -65,7 +65,7 @@ export default function RecommendationsPreview() {
                   <p className="text-xs font-semibold text-[#0A0908]">{item.name}</p>
                   <div className="flex items-center justify-between mt-1">
                     <span className="font-[var(--font-cormorant)] text-lg text-[#C9974A]">{item.price}</span>
-                    <span className="text-[10px] text-[#9C948C]">{item.retailer}</span>
+                    <span className="text-[10px]" style={{ color: C.light }}>{item.retailer}</span>
                   </div>
                 </div>
               </div>

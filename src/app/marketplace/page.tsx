@@ -24,15 +24,15 @@ export default function MarketplacePage() {
   return (
     <div className="min-h-screen bg-[#FDFAF6]">
       {/* Nav */}
-      <nav className="sticky top-0 z-50 flex items-center justify-between px-6 sm:px-10 h-16 bg-[#FDFAF6]/92 backdrop-blur-xl border-b border-[#D4CFC8]/60">
-        <Link href="/" className="font-[var(--font-cormorant)] text-2xl font-light tracking-[.1em] hover:text-[#C9974A] transition-colors">
+      <nav className="sticky top-0 z-50 flex items-center justify-between px-6 sm:px-10 h-16 bg-[#FDFAF6]/92 backdrop-blur-xl border-b border-[#D9CEBC]/60">
+        <Link href="/" className="font-[var(--font-cormorant)] text-2xl font-light tracking-[.1em] hover:text-[#C9974A] transition-colors text-[#1C1C1C]">
           dwelliq
         </Link>
         <div className="hidden sm:flex items-center gap-6">
-          <Link href="/studio" className="text-[11px] text-[#5C5550] hover:text-[#0A0908] transition-colors">3D Studio</Link>
-          <Link href="/pricing" className="text-[11px] text-[#5C5550] hover:text-[#0A0908] transition-colors">Pricing</Link>
+          <Link href="/studio" className="text-[11px] text-[#5A5A5A] hover:text-[#1C1C1C] transition-colors">3D Studio</Link>
+          <Link href="/pricing" className="text-[11px] text-[#5A5A5A] hover:text-[#1C1C1C] transition-colors">Pricing</Link>
         </div>
-        <Link href="/design" className="bg-[#0A0908] text-[#FDFAF6] text-[11px] font-semibold px-5 py-2.5 rounded-full hover:bg-[#C9974A] hover:text-[#0A0908] transition-colors">
+        <Link href="/design" className="bg-[#F0F0F0] text-[#FDFAF6] text-[11px] font-semibold px-5 py-2.5 rounded-full hover:bg-[#C9974A] hover:text-[#1C1C1C] transition-colors">
           Start Designing →
         </Link>
       </nav>
@@ -40,42 +40,42 @@ export default function MarketplacePage() {
       <div className="max-w-7xl mx-auto px-5 sm:px-10 py-12">
         {/* Header */}
         <div className="mb-10">
-          <p className="text-[10px] font-semibold tracking-[.2em] uppercase text-[#C9974A] mb-3">Marketplace</p>
-          <h1 className="font-[var(--font-cormorant)] text-5xl sm:text-6xl font-light text-[#0A0908] mb-4">Every product, scored for your room.</h1>
-          <p className="text-[#5C5550] max-w-2xl">200+ curated products across all categories. Match scores, delivery estimates, and local showroom availability — all in one place.</p>
+          <p className="text-[10px] font-semibold tracking-[.2em] uppercase text-[#8C6820] mb-3">Marketplace</p>
+          <h1 className="font-[var(--font-cormorant)] text-5xl sm:text-6xl font-light text-[#1C1C1C] mb-4">Every product, scored for your room.</h1>
+          <p className="text-[#5A5A5A] max-w-2xl">200+ curated products across all categories. Match scores, delivery estimates, and local showroom availability — all in one place.</p>
         </div>
 
         {/* Filters */}
         <div className="flex flex-wrap gap-2 mb-8">
           {FILTERS.map((f, i) => (
-            <button key={f} className="text-[11px] px-4 py-2 rounded-full border transition-all" style={{ borderColor: i === 0 ? "#0A0908" : "#D4CFC8", background: i === 0 ? "#0A0908" : "transparent", color: i === 0 ? "#FDFAF6" : "#5C5550" }}>
+            <button key={f} className="text-[11px] px-4 py-2 rounded-full border transition-all" style={{ borderColor: i === 0 ? "#1C1C1C" : "#D9CEBC", background: i === 0 ? "#1C1C1C" : "transparent", color: i === 0 ? "#FDFAF6" : "#5A5A5A" }}>
               {f}
             </button>
           ))}
           <div className="ml-auto flex items-center gap-2">
-            <input className="border border-[#D4CFC8] rounded-xl px-4 py-2 text-sm outline-none focus:border-[#C9974A] w-48 placeholder:text-[#9C948C]" placeholder="Search products…" />
+            <input className="border border-[#D9CEBC] rounded-xl px-4 py-2 text-sm outline-none focus:border-[#C9974A] w-48 placeholder:text-[#8A8A8A]" placeholder="Search products…" />
           </div>
         </div>
 
         {/* Product grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
           {PRODUCTS.map(p => (
-            <div key={p.name} className="bg-[#FDFAF6] border border-[#D4CFC8] rounded-2xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
+            <div key={p.name} className="bg-[#FDFAF6] border border-[#D9CEBC] rounded-2xl overflow-hidden hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
               <div className="relative" style={{ aspectRatio: "4/3" }}>
                 <Image src={p.img} alt={p.name} fill className="object-cover" unoptimized />
                 <div className="absolute top-2.5 left-2.5 flex flex-col gap-1">
-                  {p.tags.map(t => <span key={t} className="text-[9px] font-semibold bg-[#FDFAF6]/90 text-[#0A0908] px-2 py-0.5 rounded-full">{t}</span>)}
+                  {p.tags.map(t => <span key={t} className="text-[9px] font-semibold bg-[#FDFAF6]/90 text-[#1C1C1C] px-2 py-0.5 rounded-full">{t}</span>)}
                 </div>
-                <div className="absolute top-2.5 right-2.5 bg-[#C9974A] text-[#0A0908] text-[10px] font-bold px-2 py-0.5 rounded-full">{p.match}%</div>
+                <div className="absolute top-2.5 right-2.5 bg-[#C9974A] text-[#1C1C1C] text-[10px] font-bold px-2 py-0.5 rounded-full">{p.match}%</div>
               </div>
               <div className="p-4">
-                <p className="text-xs font-semibold text-[#0A0908] leading-snug mb-0.5">{p.name}</p>
-                <p className="text-[10px] text-[#9C948C] mb-2">{p.retailer} · {p.style}</p>
+                <p className="text-xs font-semibold text-[#1C1C1C] leading-snug mb-0.5">{p.name}</p>
+                <p className="text-[10px] mb-2" style={{ color: "#707070" }}>{p.retailer} · {p.style}</p>
                 <div className="flex items-center justify-between mb-3">
-                  <span className="font-[var(--font-cormorant)] text-xl text-[#0A0908]">${p.price.toLocaleString()}</span>
-                  <span className="text-[10px] text-[#7A9E8A]">🚚 {p.delivery}</span>
+                  <span className="font-[var(--font-cormorant)] text-xl text-[#1C1C1C]">${p.price.toLocaleString()}</span>
+                  <span className="text-[10px]" style={{ color: "#5C7A50" }}>🚚 {p.delivery}</span>
                 </div>
-                <Link href="/studio" className="block text-center text-[10px] font-semibold py-2 rounded-lg bg-[#F5F2EE] hover:bg-[#C9974A] hover:text-[#0A0908] transition-colors text-[#5C5550]">
+                <Link href="/studio" className="block text-center text-[10px] font-semibold py-2 rounded-lg bg-[#F2EBE2] hover:bg-[#C9974A] hover:text-[#1C1C1C] transition-colors text-[#5A5A5A]">
                   See in my room →
                 </Link>
               </div>
@@ -84,17 +84,17 @@ export default function MarketplacePage() {
         </div>
 
         {/* Location / local section */}
-        <div id="local" className="mt-16 p-8 bg-[#F5F2EE] rounded-3xl border border-[#D4CFC8]">
+        <div id="local" className="mt-16 p-8 bg-[#F2EBE2] rounded-3xl border border-[#D9CEBC]">
           <div className="flex items-center justify-between mb-6">
             <div>
               <p className="text-[10px] font-semibold tracking-[.2em] uppercase text-[#4A6A8A] mb-2">Local vendors</p>
-              <h2 className="font-[var(--font-cormorant)] text-3xl font-light text-[#0A0908]">Showrooms near you</h2>
+              <h2 className="font-[var(--font-cormorant)] text-3xl font-light text-[#1C1C1C]">Showrooms near you</h2>
             </div>
-            <Link href="/design" className="hidden sm:block border border-[#D4CFC8] text-[#5C5550] px-5 py-2.5 rounded-xl text-sm hover:border-[#C9974A] hover:text-[#C9974A] transition-all">
+            <Link href="/design" className="hidden sm:block border border-[#D9CEBC] text-[#5A5A5A] px-5 py-2.5 rounded-xl text-sm hover:border-[#C9974A] hover:text-[#C9974A] transition-all">
               Set my location →
             </Link>
           </div>
-          <p className="text-[#5C5550] text-sm">Enter your ZIP code in the design quiz to see local boutiques, showrooms, and same-day pickup options matched to your design.</p>
+          <p className="text-[#5A5A5A] text-sm">Enter your ZIP code in the design quiz to see local boutiques, showrooms, and same-day pickup options matched to your design.</p>
         </div>
       </div>
     </div>

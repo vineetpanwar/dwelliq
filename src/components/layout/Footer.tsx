@@ -37,12 +37,12 @@ const COLUMNS = [
 
 export default function Footer() {
   return (
-    <footer className="bg-[#1C1A17] border-t border-white/5 px-5 sm:px-8 lg:px-10 py-16">
+    <footer className="bg-[#F0F0F0] border-t border-[#D9CEBC] px-5 sm:px-8 lg:px-10 py-16">
       <div className="max-w-7xl mx-auto">
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
           <div>
-            <p className="font-[var(--font-cormorant)] text-2xl font-light text-[#FDFAF6] mb-3">dwelliq</p>
-            <p className="text-xs text-[#FDFAF6]/30 leading-relaxed max-w-xs mb-5">
+            <p className="font-[var(--font-cormorant)] text-2xl font-light text-[#1C1C1C] mb-3">dwelliq</p>
+            <p className="text-xs text-[#5A5A5A] leading-relaxed max-w-xs mb-5">
               AI interior design + cross-room budget optimization. Affiliate-first. Free for homeowners. Patent-pending technology.
             </p>
             <div className="flex gap-2">
@@ -53,7 +53,7 @@ export default function Footer() {
                   aria-label={s.label}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-8 h-8 rounded-lg border border-white/8 flex items-center justify-center text-[#FDFAF6]/25 hover:border-[#C9974A]/50 hover:text-[#C9974A] hover:bg-[#C9974A]/8 transition-all duration-200"
+                  className="w-8 h-8 rounded-lg border border-[#D9CEBC] flex items-center justify-center text-[#707070] hover:border-[#C9974A]/50 hover:text-[#C9974A] hover:bg-[#C9974A]/8 transition-all duration-200"
                 >
                   {s.icon}
                 </a>
@@ -63,10 +63,10 @@ export default function Footer() {
 
           {COLUMNS.map(col => (
             <div key={col.heading}>
-              <p className="text-[10px] tracking-[.2em] uppercase text-[#FDFAF6]/30 mb-4">{col.heading}</p>
+              <p className="text-[10px] tracking-[.2em] uppercase text-[#707070] mb-4">{col.heading}</p>
               <div className="space-y-2.5">
                 {col.links.map(l => (
-                  <Link key={l.label} href={l.href} className="block text-sm text-[#FDFAF6]/40 hover:text-[#FDFAF6]/80 transition-colors ul-link">
+                  <Link key={l.label} href={l.href} className="block text-sm text-[#5A5A5A] hover:text-[#1C1C1C] transition-colors ul-link">
                     {l.label}
                   </Link>
                 ))}
@@ -75,9 +75,9 @@ export default function Footer() {
           ))}
         </div>
 
-        <div className="border-t border-white/5 pt-6 flex flex-col sm:flex-row justify-between gap-3">
-          <p className="text-xs text-[#FDFAF6]/20">© 2026 DwellIQ · Affiliate commissions fund this product · Patent pending</p>
-          <p className="text-xs text-[#FDFAF6]/20">Free for homeowners · Forever</p>
+        <div className="border-t border-[#D9CEBC] pt-6 flex flex-col sm:flex-row justify-between gap-3">
+          <p className="text-xs text-[#707070]">© 2026 DwellIQ · Affiliate commissions fund this product · Patent pending</p>
+          <p className="text-xs text-[#707070]">Free for homeowners · Forever</p>
         </div>
       </div>
     </footer>

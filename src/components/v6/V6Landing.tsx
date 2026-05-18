@@ -9,6 +9,7 @@ import TrustMarquee from "@/sections/TrustMarquee";
 import PressStats from "@/sections/PressStats";
 import HowItWorks from "@/sections/HowItWorks";
 import PhoneMockupShowcase from "./PhoneMockupShowcase";
+import CinematicStrip from "@/sections/CinematicStrip";
 import FilmStrip from "@/sections/FilmStrip";
 import BudgetEngine from "@/sections/BudgetEngine";
 import RoomExplorer from "@/sections/RoomExplorer";
@@ -47,8 +48,8 @@ export default function V6Landing() {
         .card-lift   { transition:box-shadow .35s ease,transform .35s cubic-bezier(.34,1.56,.64,1) }
         .card-lift:hover { box-shadow:0 24px 64px rgba(10,9,8,.10);transform:translateY(-4px) }
         .btn-shimmer { background:linear-gradient(110deg,${C.brass} 30%,${C.brassLight} 50%,${C.brass} 70%);background-size:200% auto;animation:shimmer 3s linear infinite }
-        .hero-outline-btn { border:1px solid rgba(10,9,8,0.18);color:rgba(10,9,8,0.58);border-radius:9999px;transition:border-color .25s,color .25s,background .25s }
-        .hero-outline-btn:hover { border-color:#C9974A;color:#C9974A;background:rgba(201,151,74,0.06) }
+        .hero-outline-btn { border:1px solid rgba(28,28,28,0.22);color:rgba(28,28,28,0.62);border-radius:9999px;transition:border-color .25s,color .25s,background .25s }
+        .hero-outline-btn:hover { border-color:#C9974A;color:#C9974A;background:rgba(201,151,74,0.10) }
         input[type=range] { -webkit-appearance:none;height:3px;border-radius:2px;outline:none }
         input[type=range]::-webkit-slider-thumb { -webkit-appearance:none;width:16px;height:16px;border-radius:50%;background:${C.brass};cursor:pointer }
       `}</style>
@@ -71,6 +72,7 @@ export default function V6Landing() {
       <TrustMarquee />
       <PressStats />
       <HowItWorks />
+      <CinematicStrip />
       <PhoneMockupShowcase />
       <FilmStrip />
       <BudgetEngine />

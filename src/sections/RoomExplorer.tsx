@@ -56,7 +56,7 @@ export default function RoomExplorer() {
           <div className="grid lg:grid-cols-[1fr_320px] gap-6 rounded-3xl overflow-hidden border border-[#D4CFC8]">
             <div className="relative" style={{ minHeight: 380 }}>
               <Image key={activeRoom} src={ROOM_TABS[activeRoom].img} alt={ROOM_TABS[activeRoom].label} fill className="object-cover" unoptimized style={{ animation: "kenBurns 10s ease-out forwards" }} />
-              <div className="absolute inset-0 bg-gradient-to-r from-[#0A0908]/30 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#111111]/30 to-transparent" />
               <div className="absolute bottom-6 left-6">
                 <h3 className="font-[var(--font-cormorant)] text-3xl font-light text-[#FDFAF6] mb-2">{ROOM_TABS[activeRoom].label}</h3>
                 <Link href="/studio" className="inline-flex items-center gap-2 bg-[#FDFAF6]/90 text-[#0A0908] text-[11px] font-semibold px-4 py-2 rounded-full hover:bg-[#C9974A] hover:text-[#FDFAF6] transition-colors">
@@ -65,15 +65,15 @@ export default function RoomExplorer() {
               </div>
             </div>
             <div className="bg-[#FDFAF6] p-7">
-              <p className="text-[10px] font-semibold tracking-[.18em] uppercase text-[#9C948C] mb-4">Design principles</p>
+              <p className="text-[10px] font-semibold tracking-[.18em] uppercase mb-4" style={{ color: C.light }}>Design principles</p>
               <ul className="space-y-3">
                 {ROOM_TABS[activeRoom].principles.map(p => (
                   <li key={p} className="flex gap-3 text-sm text-[#5C5550]">
-                    <span className="text-[#C9974A] flex-shrink-0 mt-0.5">·</span>{p}
+                    <span className="flex-shrink-0 mt-0.5" style={{ color: C.brass }}>·</span>{p}
                   </li>
                 ))}
               </ul>
-              <Link href="/design" className="mt-7 block text-center bg-[#0A0908] text-[#FDFAF6] py-3.5 rounded-xl text-sm font-medium hover:bg-[#C9974A] hover:text-[#0A0908] transition-colors">
+              <Link href="/design" className="mt-7 block text-center bg-[#F0F0F0] text-[#FDFAF6] py-3.5 rounded-xl text-sm font-medium hover:bg-[#C9974A] hover:text-[#1C1C1C] transition-colors">
                 Design this room →
               </Link>
             </div>
@@ -82,7 +82,7 @@ export default function RoomExplorer() {
 
         {/* Style cards */}
         <div className="mt-14">
-          <p className="text-[10px] font-semibold tracking-[.18em] uppercase text-[#9C948C] mb-6">Seven style families</p>
+          <p className="text-[10px] font-semibold tracking-[.18em] uppercase mb-6" style={{ color: C.light }}>Seven style families</p>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
             {STYLES.map(s => <StyleCard key={s.name} style={s} />)}
           </div>

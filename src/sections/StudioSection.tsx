@@ -42,7 +42,7 @@ export default function StudioSection() {
       <div className="max-w-7xl mx-auto">
         <div ref={ref} className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           <div style={{ opacity: v ? 1 : 0, transition: "opacity .5s" }}>
-            <span className="inline-block text-[10px] font-semibold tracking-[.18em] uppercase text-[#7A9E8A] mb-4">3D Room Studio</span>
+            <span className="inline-block text-[10px] font-semibold tracking-[.18em] uppercase mb-4" style={{ color: C.sage }}>3D Room Studio</span>
             <h2 className="font-[var(--font-cormorant)] text-5xl sm:text-6xl font-light text-[#0A0908] leading-tight mb-6">
               Walk through your<br /><em style={{ color: C.brass }}>design</em> before<br />you buy anything.
             </h2>
@@ -52,10 +52,10 @@ export default function StudioSection() {
             <div className="space-y-4 mb-8">
               {FEATURES.map(f => (
                 <div key={f.title} className="flex gap-4">
-                  <span className="text-lg text-[#C9974A] flex-shrink-0 mt-0.5">{f.icon}</span>
+                  <span className="text-lg flex-shrink-0 mt-0.5" style={{ color: C.brass }}>{f.icon}</span>
                   <div>
                     <p className="text-sm font-semibold text-[#0A0908]">{f.title}</p>
-                    <p className="text-[11px] text-[#9C948C] mt-0.5">{f.desc}</p>
+                    <p className="text-[11px] mt-0.5" style={{ color: C.light }}>{f.desc}</p>
                   </div>
                 </div>
               ))}
@@ -85,7 +85,7 @@ export default function StudioSection() {
                 <div className="absolute top-12 right-4 bg-[#FDFAF6]/90 rounded-xl p-3 text-xs max-w-[140px]">
                   <p className="font-semibold text-[#0A0908]">Rivet Sofa</p>
                   <p className="text-[#5C5550]">$799 · Fits ✓</p>
-                  <p className="text-[#7A9E8A] text-[10px]">3 days delivery</p>
+                  <p className="text-[10px]" style={{ color: C.sage }}>3 days delivery</p>
                 </div>
                 <div className="absolute bottom-4 left-4 flex gap-2">
                   {["Orbit","Pan","Zoom"].map(ctrl => (
@@ -110,7 +110,7 @@ export default function StudioSection() {
                 <div className="w-8 h-8 rounded-full bg-[#C9974A] flex items-center justify-center text-white text-xs font-bold flex-shrink-0">AI</div>
                 <div>
                   <p className="text-sm font-semibold text-[#0A0908]">DwellIQ Design Assistant</p>
-                  <p className="text-[10px] text-[#7A9E8A]">Understands your room · budget · style</p>
+                  <p className="text-[10px]" style={{ color: C.sage }}>Understands your room · budget · style</p>
                 </div>
               </div>
               <div className="p-5 space-y-3 min-h-[220px]">
@@ -128,7 +128,7 @@ export default function StudioSection() {
                   onChange={e => setAiInput(e.target.value)}
                   onKeyDown={e => e.key === "Enter" && sendAiMessage()}
                   placeholder="e.g. Stay under $5,000 · Go more Japandi · Add storage…"
-                  className="flex-1 bg-[#FDFAF6] border border-[#D4CFC8] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#C9974A] transition-colors placeholder:text-[#9C948C]"
+                  className="flex-1 bg-[#FDFAF6] border border-[#D4CFC8] rounded-xl px-4 py-3 text-sm outline-none focus:border-[#C9974A] transition-colors placeholder:text-[#706A63]"
                 />
                 <button onClick={sendAiMessage} className="bg-[#C9974A] text-[#0A0908] px-4 py-3 rounded-xl font-semibold text-sm hover:bg-[#D4A96A] transition-colors">→</button>
               </div>
@@ -141,7 +141,7 @@ export default function StudioSection() {
           </div>
 
           <div style={{ opacity: v ? 1 : 0, transition: "opacity .5s .4s" }}>
-            <span className="inline-block text-[10px] font-semibold tracking-[.18em] uppercase text-[#C4735A] mb-4">In-room AI assistant</span>
+            <span className="inline-block text-[10px] font-semibold tracking-[.18em] uppercase mb-4" style={{ color: C.terra }}>In-room AI assistant</span>
             <h3 className="font-[var(--font-cormorant)] text-4xl sm:text-5xl font-light text-[#0A0908] leading-tight mb-4">
               Talk to your<br /><em style={{ color: C.terra }}>designer.</em>
             </h3>
@@ -149,7 +149,7 @@ export default function StudioSection() {
             <div className="space-y-3">
               {PROMPTS.map(cmd => (
                 <div key={cmd} className="flex items-center gap-3 text-sm text-[#5C5550]">
-                  <span className="text-[#C4735A]">→</span><span>&ldquo;{cmd}&rdquo;</span>
+                  <span style={{ color: C.terra }}>→</span><span>&ldquo;{cmd}&rdquo;</span>
                 </div>
               ))}
             </div>

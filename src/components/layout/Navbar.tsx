@@ -53,7 +53,7 @@ export default function Navbar() {
           </Link>
           <Link
             href="/design"
-            className="btn-shimmer text-[#0A0908] text-[11px] font-semibold px-5 py-2.5 rounded-full"
+            className="btn-shimmer text-[#1C1C1C] text-[11px] font-semibold px-5 py-2.5 rounded-full"
             style={{ boxShadow: "0 2px 16px rgba(201,151,74,0.22)" }}
           >
             Start Free →
@@ -75,7 +75,7 @@ export default function Navbar() {
       {menuOpen && (
         <div className="fixed inset-0 z-40 lg:hidden" onClick={() => setMenuOpen(false)}>
           <div
-            className="absolute top-16 inset-x-0 bg-[#FDFAF6] border-b border-[#D4CFC8] shadow-2xl px-6 py-5"
+            className="absolute top-16 inset-x-0 bg-[#FDFAF6] border-b border-[#D9CEBC] shadow-2xl px-6 py-5"
             onClick={e => e.stopPropagation()}
             style={{ animation: "fadeIn .15s ease both" }}
           >
@@ -84,7 +84,7 @@ export default function Navbar() {
                 key={label}
                 href={href}
                 onClick={() => setMenuOpen(false)}
-                className="flex justify-between items-center py-4 text-[#5C5550] border-b border-[#EAE6DF] last:border-0"
+                className="flex justify-between items-center py-4 text-[#5A5A5A] border-b border-[#E8DFCF] last:border-0"
               >
                 <span className="text-base">{label}</span>
                 <span className="text-[#C9974A]">→</span>
@@ -93,7 +93,7 @@ export default function Navbar() {
             <Link
               href="/design"
               onClick={() => setMenuOpen(false)}
-              className="block text-center mt-5 bg-[#0A0908] text-[#FDFAF6] py-4 rounded-2xl text-sm font-medium"
+              className="block text-center mt-5 bg-[#1C1C1C] text-[#FDFAF6] py-4 rounded-2xl text-sm font-medium"
             >
               Start Designing Free →
             </Link>

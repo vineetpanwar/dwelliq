@@ -4,12 +4,12 @@ import { useEffect, useRef, useState } from "react";
 
 // ── Design tokens ─────────────────────────────────────────────────────────────
 const T = {
-  cream: "#FDFAF6", stone: "#F5F2EE", greige: "#EAE6DF",
-  ink: "#0A0908", charcoal: "#1C1A17", mid: "#5C5550",
-  border: "#D4CFC8",
+  cream: "#FDFAF6", stone: "#F2EBE2", greige: "#E8DFCF",
+  ink: "#1C1C1C", charcoal: "#111111", mid: "#5A5A5A",
+  border: "#D9CEBC",
   brass: "#C9974A", brassLight: "#D4A96A",
-  sage: "#7A9E8A",
-  terra: "#C4735A",
+  sage: "#5C7A50",
+  terra: "#8A4A30",
 };
 
 // ── Step metadata ─────────────────────────────────────────────────────────────

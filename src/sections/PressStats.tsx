@@ -19,13 +19,13 @@ export default function PressStats() {
     <div ref={ref} className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 py-16 sm:py-24">
       {/* Press logos */}
       <div className="mb-16 pb-14 border-b border-[#EAE6DF]">
-        <p className="text-center text-[10px] tracking-[.22em] uppercase text-[#B8B2AB] mb-8">As seen in</p>
+        <p className="text-center text-[10px] tracking-[.22em] uppercase mb-8" style={{ color: C.pressLight }}>As seen in</p>
         <div className="flex flex-wrap items-center justify-center gap-3">
           {PRESS.map(p => (
             <span
               key={p.name}
-              className="font-[var(--font-cormorant)] text-xl font-light select-none cursor-default transition-all duration-200 hover:border-[#C9974A]/40 hover:text-[#9C948C]"
-              style={{ color: "#B8B2AB", letterSpacing: "0.14em", border: "1px solid #EAE6DF", borderRadius: 999, padding: "6px 18px" }}
+              className="font-[var(--font-cormorant)] text-xl font-light select-none cursor-default transition-all duration-200 hover:border-[#C9974A]/40"
+              style={{ color: C.pressLight, letterSpacing: "0.14em", border: `1px solid ${C.greige}`, borderRadius: 999, padding: "6px 18px" }}
             >
               {p.name}
             </span>
@@ -43,7 +43,7 @@ export default function PressStats() {
             <div className="font-[var(--font-cormorant)] font-light leading-none mb-3 whitespace-nowrap" style={{ fontSize: "clamp(42px,6vw,80px)", color: s.color }}>
               <CountUp end={s.end} trigger={v} suffix={s.suffix} />
             </div>
-            <p className="text-[10px] tracking-[.18em] uppercase text-[#9C948C]">{s.label}</p>
+            <p className="text-[10px] tracking-[.18em] uppercase" style={{ color: C.light }}>{s.label}</p>
           </div>
         ))}
       </div>

@@ -24,18 +24,18 @@ export default function FilmStrip() {
   return (
     <div
       ref={ref}
-      className="relative overflow-hidden bg-[#0A0908] py-12"
+      className="relative overflow-hidden bg-[#F0F0F0] py-12"
       style={{ opacity: v ? 1 : 0, transition: "opacity 1.4s ease" }}
     >
-      <div className="absolute top-0 inset-x-0 h-12 bg-gradient-to-b from-[#0A0908] to-transparent z-10 pointer-events-none" />
-      <div className="absolute bottom-0 inset-x-0 h-12 bg-gradient-to-t from-[#0A0908] to-transparent z-10 pointer-events-none" />
+      <div className="absolute top-0 inset-x-0 h-12 bg-gradient-to-b from-[#F0F0F0] to-transparent z-10 pointer-events-none" />
+      <div className="absolute bottom-0 inset-x-0 h-12 bg-gradient-to-t from-[#F0F0F0] to-transparent z-10 pointer-events-none" />
 
       {/* Row 1 — scroll left */}
       <div className="flex gap-3 mb-3" style={{ animation: "filmScroll 55s linear infinite", willChange: "transform" }}>
         {[...IMAGES, ...IMAGES].map((img, i) => (
           <div key={i} className="relative flex-shrink-0 rounded-xl overflow-hidden" style={{ width: 340, height: 220, borderColor: "rgba(255,255,255,0.08)", borderWidth: 1, borderStyle: "solid" }}>
             <Image src={img.src} alt={img.label} fill className="object-cover" style={{ opacity: 0.75 }} unoptimized />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0A0908]/60 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/60 to-transparent" />
             <span className="absolute bottom-3 left-3 text-[9px] tracking-[.2em] uppercase text-white/40 font-medium">{img.label}</span>
           </div>
         ))}
@@ -46,19 +46,19 @@ export default function FilmStrip() {
         {[...row2, ...row2].map((img, i) => (
           <div key={i} className="relative flex-shrink-0 rounded-xl overflow-hidden" style={{ width: 290, height: 186, borderColor: "rgba(255,255,255,0.06)", borderWidth: 1, borderStyle: "solid" }}>
             <Image src={img.src} alt={img.label} fill className="object-cover" style={{ opacity: 0.55 }} unoptimized />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0A0908]/50 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/50 to-transparent" />
           </div>
         ))}
       </div>
 
       {/* Centre text overlay */}
       <div className="absolute inset-0 flex items-center justify-center z-20 pointer-events-none">
-        <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, #0A0908 0%, rgba(10,9,8,0.15) 40%, rgba(10,9,8,0.15) 60%, #0A0908 100%)" }} />
+        <div className="absolute inset-0" style={{ background: "linear-gradient(90deg, #111111 0%, rgba(17,17,17,0.15) 40%, rgba(17,17,17,0.15) 60%, #111111 100%)" }} />
         <div className="relative text-center px-8">
           <p className="text-[9px] font-semibold tracking-[.3em] uppercase text-[#C9974A] mb-3">24,000+ rooms designed</p>
           <h3
             className="font-[var(--font-cormorant)] font-light text-[#FDFAF6] leading-[.95]"
-            style={{ fontSize: "clamp(34px,5vw,62px)", textShadow: "0 2px 40px rgba(10,9,8,0.8)" }}
+            style={{ fontSize: "clamp(34px,5vw,62px)", textShadow: "0 2px 40px rgba(17,17,17,0.9)" }}
           >
             Every space,{" "}
             <em style={{ color: C.brass }}>intentionally</em>

@@ -208,7 +208,7 @@ export default function HowItWorks() {
               </button>
             ))}
             <div className="px-5 pt-4">
-              <Link href="/design" className="inline-flex items-center gap-2 bg-[#0A0908] text-[#FDFAF6] px-8 py-4 rounded-2xl text-sm font-medium hover:bg-[#C9974A] hover:text-[#0A0908] transition-colors">
+              <Link href="/design" className="inline-flex items-center gap-2 bg-[#1C1C1C] text-[#FDFAF6] px-8 py-4 rounded-2xl text-sm font-medium hover:bg-[#C9974A] hover:text-[#1C1C1C] transition-colors">
                 Start Designing — It&apos;s Free →
               </Link>
             </div>
@@ -219,10 +219,10 @@ export default function HowItWorks() {
             className="relative rounded-3xl overflow-hidden"
             style={{
               minHeight: 480,
-              background: "#0A0908",
+              background: "#1C1C1C",
               opacity: v ? 1 : 0,
               transition: "opacity .5s .18s",
-              boxShadow: "0 28px 80px rgba(10,9,8,0.13), 0 4px 20px rgba(10,9,8,0.07)",
+              boxShadow: "0 28px 80px rgba(28,28,28,0.18), 0 4px 20px rgba(28,28,28,0.10)",
             }}
           >
             {HIW_STEPS.map((s, i) => (

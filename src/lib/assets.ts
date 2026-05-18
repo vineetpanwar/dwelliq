@@ -11,9 +11,9 @@
 //   Poster: export const HERO_VIDEO_POSTER_URL = "/video/hero-poster.jpg";
 //
 // Leave empty to show the gradient placeholder instead of the video.
-export const HERO_VIDEO_WEBM_URL = "";
-export const HERO_VIDEO_MP4_URL  = "";
-export const HERO_VIDEO_POSTER_URL = "";
+export const HERO_VIDEO_WEBM_URL   = "/video/hero-walkthrough.webm";
+export const HERO_VIDEO_MP4_URL    = "/video/hero-walkthrough.mp4";
+export const HERO_VIDEO_POSTER_URL = "/video/hero-poster.jpg";
 
 // Legacy single-URL slot (kept for backward compat with other landing versions).
 export const HERO_VIDEO_URL = "";

@@ -24,7 +24,7 @@ export default function LocationSection() {
     <section className="py-24 sm:py-36 px-5 sm:px-8 lg:px-10">
       <div ref={ref} className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
         <div style={{ opacity: v ? 1 : 0, transition: "opacity .5s" }}>
-          <span className="inline-block text-[10px] font-semibold tracking-[.18em] uppercase text-[#4A6A8A] mb-4">Location intelligence</span>
+          <span className="inline-block text-[10px] font-semibold tracking-[.18em] uppercase mb-4" style={{ color: C.blue }}>Location intelligence</span>
           <h2 className="font-[var(--font-cormorant)] text-5xl sm:text-6xl font-light text-[#0A0908] leading-tight mb-6">
             Your ZIP code<br /><em style={{ color: C.blue }}>shapes</em> your design.
           </h2>
@@ -34,10 +34,10 @@ export default function LocationSection() {
           <div className="space-y-4">
             {FEATURES.map(f => (
               <div key={f.label} className="flex gap-4 p-4 bg-[#F5F2EE] rounded-xl border border-[#EAE6DF]">
-                <span className="text-[#4A6A8A] mt-0.5 flex-shrink-0">◎</span>
+                <span className="mt-0.5 flex-shrink-0" style={{ color: C.blue }}>◎</span>
                 <div>
                   <p className="text-sm font-semibold text-[#0A0908]">{f.label}</p>
-                  <p className="text-[11px] text-[#9C948C] mt-0.5">{f.desc}</p>
+                  <p className="text-[11px] mt-0.5" style={{ color: C.light }}>{f.desc}</p>
                 </div>
               </div>
             ))}
@@ -52,12 +52,12 @@ export default function LocationSection() {
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="relative w-full h-full">
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
-                  <div className="w-5 h-5 rounded-full bg-[#C9974A] border-2 border-[#FDFAF6] shadow-lg" style={{ animation: "pulse 2s ease-in-out infinite" }} />
+                  <div className="w-5 h-5 rounded-full border-2 border-[#FDFAF6] shadow-lg" style={{ background: C.brass, animation: "pulse 2s ease-in-out infinite" }} />
                   <div className="mt-1 bg-[#FDFAF6] rounded-lg px-3 py-1.5 text-[10px] font-semibold text-[#0A0908] shadow whitespace-nowrap">Your property</div>
                 </div>
                 {PINS.map(pin => (
                   <div key={pin.label} className="absolute flex flex-col items-center" style={{ top: pin.top, left: pin.left }}>
-                    <div className="w-3.5 h-3.5 rounded-full bg-[#7A9E8A] border-2 border-[#FDFAF6] shadow" />
+                    <div className="w-3.5 h-3.5 rounded-full border-2 border-[#FDFAF6] shadow" style={{ background: C.sage }} />
                     <div className="mt-1 bg-[#FDFAF6]/90 rounded-md px-2 py-1 text-[9px] text-[#0A0908] shadow whitespace-nowrap">{pin.label}</div>
                   </div>
                 ))}
@@ -65,11 +65,11 @@ export default function LocationSection() {
               </div>
             </div>
             <div className="absolute bottom-4 left-4 right-4 bg-[#FDFAF6]/95 rounded-2xl p-4 border border-[#D4CFC8]">
-              <p className="text-[10px] tracking-wider uppercase text-[#9C948C] mb-2">Jersey City, NJ 07302</p>
+              <p className="text-[10px] tracking-wider uppercase mb-2" style={{ color: C.light }}>Jersey City, NJ 07302</p>
               <div className="grid grid-cols-3 gap-3 text-center">
-                <div><p className="font-[var(--font-cormorant)] text-xl text-[#C9974A]">3</p><p className="text-[9px] text-[#9C948C]">local vendors</p></div>
-                <div><p className="font-[var(--font-cormorant)] text-xl text-[#7A9E8A]">2 mi</p><p className="text-[9px] text-[#9C948C]">avg. showroom</p></div>
-                <div><p className="font-[var(--font-cormorant)] text-xl text-[#0A0908]">3 days</p><p className="text-[9px] text-[#9C948C]">avg. delivery</p></div>
+                <div><p className="font-[var(--font-cormorant)] text-xl" style={{ color: C.brass }}>3</p><p className="text-[9px]" style={{ color: C.light }}>local vendors</p></div>
+                <div><p className="font-[var(--font-cormorant)] text-xl" style={{ color: C.sage }}>2 mi</p><p className="text-[9px]" style={{ color: C.light }}>avg. showroom</p></div>
+                <div><p className="font-[var(--font-cormorant)] text-xl text-[#0A0908]">3 days</p><p className="text-[9px]" style={{ color: C.light }}>avg. delivery</p></div>
               </div>
             </div>
           </div>

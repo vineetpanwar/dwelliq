@@ -32,7 +32,7 @@ export default function StyleCard({ style }: { style: Style }) {
           unoptimized
           style={{ transform: hov ? "scale(1.06)" : "scale(1)", transition: "transform .5s ease" }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0A0908]/70 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#111111]/70 to-transparent" />
         <div className="absolute bottom-0 left-0 right-0 p-3">
           <p className="font-[var(--font-cormorant)] text-base text-[#FDFAF6] leading-tight">{style.name}</p>
           {hov && (

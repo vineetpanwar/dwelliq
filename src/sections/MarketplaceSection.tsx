@@ -54,12 +54,12 @@ export default function MarketplaceSection() {
               </div>
               <div className="p-4">
                 <p className="text-xs font-semibold text-[#0A0908] leading-snug mb-0.5">{p.name}</p>
-                <p className="text-[10px] text-[#9C948C] mb-2">
+                <p className="text-[10px] mb-2" style={{ color: C.light }}>
                   {p.retailer} · <span style={{ color: STYLE_COLORS[p.style] ?? C.mid }}>{p.style}</span>
                 </p>
                 <div className="flex items-center justify-between mb-3">
                   <span className="font-[var(--font-cormorant)] text-xl text-[#0A0908]">${p.price.toLocaleString()}</span>
-                  <span className="text-[10px] text-[#7A9E8A]">🚚 {p.delivery}</span>
+                  <span className="text-[10px]" style={{ color: C.sage }}>🚚 {p.delivery}</span>
                 </div>
                 <Link href="/studio" className="block text-center text-[10px] font-semibold py-2 rounded-xl bg-[#F5F2EE] hover:bg-[#C9974A] hover:text-[#0A0908] transition-colors text-[#5C5550]">
                   See in my room →
