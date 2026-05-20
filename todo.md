@@ -174,12 +174,18 @@ These unlock the real "AI designer" quality. None are blocking for the v1 walkth
 
 ### Live catalog fallback
 
-| Service | What it powers | Env var | Where to get it |
+| Service | What it powers | Env vars | Where to get it |
 |---|---|---|---|
-| **Walmart Developer** | Live catalog fallback (when curated returns <3 matches) | `WALMART_API_KEY` | [developer.walmart.com](https://developer.walmart.com/) (signup, ~1–2 day approval) |
-| **eBay Browse** | Live catalog fallback (secondary) | `EBAY_APP_ID` | [developer.ebay.com](https://developer.ebay.com/) → App key |
+| **Walmart I/O Affiliate API** | Live catalog fallback (when curated returns <3 matches). Supports `query` + `categoryId` + `facet.range=price:[min TO max]` + `zip`/`lat`/`lon` + `sort` — covers everything `/api/picks` needs in a single call. | `WALMART_CONSUMER_ID`, `WALMART_PRIVATE_KEY` | [walmart.io/registration](https://walmart.io/registration) → pick **Affiliate**. Note: NOT `developer.walmart.com` (that's the seller portal). |
+| **eBay Browse API** | Live catalog fallback (secondary, for SKUs Walmart doesn't carry) | `EBAY_APP_ID` | [developer.ebay.com](https://developer.ebay.com/) → App key |
 
-- [ ] Walmart key approved
+**Walmart signup notes:**
+
+- The portal asks how you want to interact with Walmart.com → choose **Affiliate** (not Developer).
+- You'll likely be prompted to link an [Impact](https://impact.com/) publisher ID — Walmart routes affiliate tracking and payouts through Impact even though API access is granted via walmart.io.
+- After approval you get a `consumerId` + `privateKey` for signing requests. Standard tier rate limit: ~5 requests/sec, ~100k/day.
+
+- [ ] Walmart consumerId + privateKey received (and added to `.env.local`)
 - [ ] eBay app key created
 
 ### Affiliate revenue (when you start driving real traffic)
