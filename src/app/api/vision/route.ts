@@ -1,5 +1,7 @@
 import { supabaseAdmin } from "@/lib/supabase";
 import { embedImageUrl } from "@/lib/engine/embedding";
+import { segmentSpot } from "@/lib/engine/segment";
+import { estimateBboxScaleCm } from "@/lib/engine/depth";
 import type { VisionFeatures, LightTemp } from "@/lib/engine/types";
 import { checkCsrf } from "@/lib/csrf";
 
@@ -21,6 +23,16 @@ export async function POST(request: Request) {
   }
 
   const features = await buildStubFeatures(body);
+
+  // Phase 3d: SAM 2 + Depth Anything (best-effort; null when REPLICATE_API_TOKEN absent)
+  if (body.photo_url && body.tap_point) {
+    const [mask, scaleCm] = await Promise.all([
+      segmentSpot(body.photo_url, body.tap_point),
+      estimateBboxScaleCm(body.photo_url, features.bbox),
+    ]);
+    if (mask) features.mask_url = mask;
+    if (scaleCm !== null) features.depth_scale_cm = scaleCm;
+  }
 
   const db = supabaseAdmin;
   const { error } = await db.from("vision_features").upsert({
