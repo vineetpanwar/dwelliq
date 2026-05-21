@@ -42,10 +42,12 @@ describe("CatalogSyncer", () => {
     const source = new FakeSource([sampleProduct("walmart-1")]);
     const syncer = new CatalogSyncer({ sources: [source], categories: ["sofa"], perCategory: 5 });
     await syncer.run();
-    const upsertedArg = upsertMock.mock.calls[0][0];
-    const rows = Array.isArray(upsertedArg) ? upsertedArg : [upsertedArg];
-    expect(rows[0].is_curated).toBe(false);
-    expect(rows[0].source).toBe("walmart");
-    expect(rows[0].last_seen_at).toBeTruthy();
+    expect(upsertMock).toHaveBeenCalled();
+    const calls = upsertMock.mock.calls as unknown as [unknown][];
+    const upsertedArg = calls[0]![0] as Record<string, unknown> | Record<string, unknown>[];
+    const rows = (Array.isArray(upsertedArg) ? upsertedArg : [upsertedArg]) as Record<string, unknown>[];
+    expect(rows[0]!.is_curated).toBe(false);
+    expect(rows[0]!.source).toBe("walmart");
+    expect(rows[0]!.last_seen_at).toBeTruthy();
   });
 });
