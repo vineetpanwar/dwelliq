@@ -3,6 +3,7 @@ import { retrieve } from "@/lib/engine/retrieval";
 import { getReranker } from "@/lib/engine/rerank";
 import { RuleBasedReranker } from "@/lib/engine/reranker";
 import { getAvailabilityChecker } from "@/lib/engine/live-availability";
+import { checkRate } from "@/lib/engine/rate-limit";
 import type { Brief, VisionFeatures, PickSet } from "@/lib/engine/types";
 import type { ProductCategory } from "@/lib/types";
 import { checkCsrf } from "@/lib/csrf";
@@ -25,6 +26,20 @@ export async function POST(request: Request) {
   let body: Body;
   try { body = await request.json(); }
   catch { return Response.json({ error: "Invalid JSON" }, { status: 400 }); }
+
+  if (process.env.NODE_ENV !== "test") {
+    const sessionKey = body.session_id ?? "anon";
+    const rateCheck = await checkRate(
+      `picks:${sessionKey}`,
+      parseInt(process.env.RATE_LIMIT_PICKS_PER_SEC ?? "1")
+    );
+    if (!rateCheck.allowed) {
+      return new Response("Rate limited", {
+        status: 429,
+        headers: { "Retry-After": String(rateCheck.retryAfter ?? 1) },
+      });
+    }
+  }
 
   if (!body.photo_id || !body.query) {
     return Response.json({ error: "Missing photo_id or query" }, { status: 400 });
