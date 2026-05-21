@@ -1,6 +1,7 @@
 import { supabaseAdmin } from "@/lib/supabase";
 import { retrieve } from "@/lib/engine/retrieval";
 import { RuleBasedReranker } from "@/lib/engine/reranker";
+import { NoopAvailabilityChecker, type AvailabilityChecker } from "@/lib/engine/availability";
 import type { Brief, VisionFeatures } from "@/lib/engine/types";
 import type { ProductCategory } from "@/lib/types";
 
@@ -15,6 +16,7 @@ interface Body {
 }
 
 const reranker = new RuleBasedReranker();
+const checker: AvailabilityChecker = new NoopAvailabilityChecker();
 
 export async function POST(request: Request) {
   let body: Body;
@@ -65,7 +67,22 @@ export async function POST(request: Request) {
     brief,
   });
 
-  // 4. Persist picks + telemetry shell.
+  // 4. Verify availability and top up from next candidate if needed.
+  const { unavailable } = await checker.verify(pickSet.picks);
+  if (unavailable.length > 0) {
+    const pickedSkus = new Set(pickSet.picks.map((p) => p.sku));
+    const replacements = candidates.filter((c) => !pickedSkus.has(c.sku));
+
+    const newPicks = pickSet.picks.map((p) => {
+      if (!unavailable.find((u) => u.sku === p.sku)) return p;
+      const next = replacements.shift();
+      if (!next) return p;
+      return { ...p, sku: next.sku, product: next.product };
+    });
+    pickSet.picks = newPicks as [typeof newPicks[0], typeof newPicks[0], typeof newPicks[0]];
+  }
+
+  // 5. Persist picks + telemetry shell.
   const pickSetId = pickSet.pick_set_id;
   const insErr = await db.from("picks").insert({
     id: pickSetId,
