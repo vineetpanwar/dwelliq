@@ -14,7 +14,12 @@ vi.mock("@/lib/supabase", () => ({
       }) }) }),
       update: () => ({ eq: updateMock }),
     }),
-    storage: { from: () => ({ getPublicUrl: () => ({ data: { publicUrl: "https://photo.jpg" } }) }) },
+    storage: {
+      from: () => ({
+        getPublicUrl: () => ({ data: { publicUrl: "https://photo.jpg" } }),
+        createSignedUrl: async () => ({ data: { signedUrl: "https://photo.jpg?token=stub" }, error: null }),
+      }),
+    },
   }),
 }));
 

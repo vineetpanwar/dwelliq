@@ -1,5 +1,5 @@
 import { supabaseAdmin } from "@/lib/supabase";
-import { stubEmbedFromImageUrl } from "@/lib/engine/embedding-stub";
+import { embedImageUrl } from "@/lib/engine/embedding";
 import type { VisionFeatures, LightTemp } from "@/lib/engine/types";
 
 interface Body {
@@ -51,7 +51,7 @@ async function buildStubFeatures(body: Body): Promise<VisionFeatures> {
   ];
 
   const seed = body.photo_url ?? body.photo_id ?? "fallback";
-  const clip_embedding = await stubEmbedFromImageUrl(seed);
+  const clip_embedding = await embedImageUrl(seed);
 
   // Deterministic palette + light temp from the seed.
   const hash = [...seed].reduce((a, c) => (a + c.charCodeAt(0)) >>> 0, 0);

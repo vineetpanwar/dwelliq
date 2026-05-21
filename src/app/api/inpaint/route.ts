@@ -1,5 +1,5 @@
 import { supabaseAdmin } from "@/lib/supabase";
-import { runInpaintStubs } from "@/lib/engine/inpaint-stub";
+import { runInpaint } from "@/lib/engine/inpaint";
 import type { Pick } from "@/lib/engine/types";
 
 interface Body { pick_set_id?: string }
@@ -24,16 +24,22 @@ export async function POST(request: Request) {
     return Response.json({ error: "pick_set not found" }, { status: 404 });
   }
 
-  // Resolve the user's photo URL from storage.
+  // Resolve the user's photo URL from storage. Bucket is private, so prefer a
+  // signed URL so Gemini can fetch it. If signing fails (e.g. the photo was
+  // never uploaded — common in unit/e2e tests), fall back to the public URL so
+  // the stub path still has something to return.
   const path = `uploads/${row.photo_id}.jpg`;
-  const { data: pub } = db.storage.from(BUCKET).getPublicUrl(path);
-  const photoUrl = pub.publicUrl;
+  const { data: signed } = await db.storage
+    .from(BUCKET)
+    .createSignedUrl(path, 60 * 60);
+  const photoUrl =
+    signed?.signedUrl ?? db.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
 
   const picks = row.results as Pick[];
   const roles = picks.map(p => p.role);   // 'A' | 'B' | 'C'
 
-  // Plan 1 stub: returns photoUrl keyed by role. Plan 3 will key by actual SKU.
-  const results = await runInpaintStubs(photoUrl, roles);
+  // Real Gemini call when GOOGLE_API_KEY is set, else stub.
+  const results = await runInpaint(photoUrl, picks);
 
   // Write into the columns. Use a 50ms delay so the GET /api/picks/[id]
   // streaming UX in mobile (Plan 2) has something to observe.
