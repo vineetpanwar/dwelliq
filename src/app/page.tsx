@@ -7,5 +7,12 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
-  return <V6Landing />;
+  return (
+    <>
+      <div style={{ display: "none" }}>
+        Impact-Site-Verification: cadae08b-c619-49d0-ae4c-4c45a07a9f35
+      </div>
+      <V6Landing />
+    </>
+  );
 }
