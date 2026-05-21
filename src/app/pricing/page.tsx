@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import CheckoutButton from "@/components/CheckoutButton";
 
 export const metadata: Metadata = {
   title: "Pricing — DwellIQ",
@@ -11,7 +12,6 @@ const PLANS = [
     name: "Free",
     price: "$0",
     period: "forever",
-    color: "#5C5550",
     accent: "#7A9E8A",
     features: [
       "1 room per project",
@@ -21,14 +21,14 @@ const PLANS = [
       "Local vendor discovery",
     ],
     cta: "Start for free",
-    href: "/design",
+    href: "/design" as string,
+    stripePlan: null as null | "pro" | "studio",
     primary: false,
   },
   {
     name: "Pro",
     price: "$19",
     period: "per month",
-    color: "#C9974A",
     accent: "#C9974A",
     features: [
       "Unlimited rooms & projects",
@@ -40,7 +40,8 @@ const PLANS = [
       "Priority support",
     ],
     cta: "Try Pro free for 14 days",
-    href: "/signup",
+    href: null as string | null,
+    stripePlan: "pro" as null | "pro" | "studio",
     primary: true,
     badge: "Most popular",
   },
@@ -48,7 +49,6 @@ const PLANS = [
     name: "Studio",
     price: "$49",
     period: "per month",
-    color: "#C4735A",
     accent: "#C4735A",
     features: [
       "Everything in Pro",
@@ -59,8 +59,9 @@ const PLANS = [
       "Dedicated account manager",
       "Custom integrations",
     ],
-    cta: "Contact sales",
-    href: "mailto:hello@dwelliq.com",
+    cta: "Get Studio",
+    href: null as string | null,
+    stripePlan: "studio" as null | "pro" | "studio",
     primary: false,
   },
 ];
@@ -109,9 +110,13 @@ export default function PricingPage() {
                   </li>
                 ))}
               </ul>
-              <Link href={plan.href} className={`block text-center py-4 rounded-2xl text-sm font-semibold transition-colors ${plan.primary ? "bg-[#C9974A] text-[#0A0908] hover:bg-[#D4A96A]" : "border border-[#D4CFC8] text-[#5C5550] hover:border-[#C9974A] hover:text-[#C9974A]"}`}>
-                {plan.cta} →
-              </Link>
+              {plan.stripePlan ? (
+                <CheckoutButton plan={plan.stripePlan} label={plan.cta} primary={plan.primary} />
+              ) : (
+                <Link href={plan.href!} className={`block text-center py-4 rounded-2xl text-sm font-semibold transition-colors ${plan.primary ? "bg-[#C9974A] text-[#0A0908] hover:bg-[#D4A96A]" : "border border-[#D4CFC8] text-[#5C5550] hover:border-[#C9974A] hover:text-[#C9974A]"}`}>
+                  {plan.cta} →
+                </Link>
+              )}
             </div>
           ))}
         </div>
