@@ -85,3 +85,16 @@ npm run sync
 - `SYNC_DEFAULT_ZIP` (e.g. `10003` — used by Walmart's zip-aware pricing)
 
 After deploy, the catalog table grows automatically from the live APIs while hand-curated rows (those with `is_curated=true`) are never overwritten by sync.
+
+## AI Engine (Plan 3)
+
+In addition to upstream PR #2's CLIP + Gemini adapters (`src/lib/engine/embedding.ts`, `src/lib/engine/inpaint.ts`), Plan 3 wires three new env-gated providers:
+
+- `ANTHROPIC_API_KEY` — activates `ClaudeSonnetReranker` for `/api/picks` (designer-voice rationale). Without the key, `RuleBasedReranker` is used. The route falls back to rule-based automatically if Claude errors, logging `rerank_fallback=true` in telemetry.
+- `WALMART_*` + `EBAY_*` — activate `LiveAvailabilityChecker` for `/api/picks` (drops out-of-stock SKUs at match time, tops up from the next-best candidate).
+- `SENTRY_DSN` — activates Sentry error capture in production.
+
+Plus:
+- Rate limits via `RATE_LIMIT_PICKS_PER_SEC` (default 1, per `session_id`) and `RATE_LIMIT_UPLOAD_PER_SEC` (default 10, per IP). Bypassed in test environment.
+- AR support: `catalog.gltf_url` / `catalog.usdz_url` populated for SKUs that have 3D models. The mobile AR button auto-activates when these are non-null.
+- Optional `ANTHROPIC_API_KEY` also activates Claude Haiku style tagging on sync'd rows in `CatalogSyncer.run`.
