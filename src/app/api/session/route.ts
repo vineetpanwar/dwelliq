@@ -1,7 +1,16 @@
 import { supabaseAdmin } from "@/lib/supabase";
 import { randomUUID } from "crypto";
+import { rateLimit, getIp, tooManyRequests } from "@/lib/rate-limit";
+
+// POST: 20 saves per IP per hour
+const POST_LIMIT = { limit: 20, windowMs: 60 * 60 * 1000 };
+// GET: 60 reads per IP per minute
+const GET_LIMIT  = { limit: 60, windowMs: 60 * 1000 };
 
 export async function POST(request: Request) {
+  const { ok, resetAt } = rateLimit(`session-post:${getIp(request)}`, POST_LIMIT);
+  if (!ok) return tooManyRequests(resetAt);
+
   let body: { session_token?: string; onboarding_data: Record<string, unknown> };
   try {
     body = await request.json();
@@ -34,6 +43,9 @@ export async function POST(request: Request) {
 }
 
 export async function GET(request: Request) {
+  const { ok, resetAt } = rateLimit(`session-get:${getIp(request)}`, GET_LIMIT);
+  if (!ok) return tooManyRequests(resetAt);
+
   const token = new URL(request.url).searchParams.get("token");
   if (!token) return Response.json({ error: "Missing token" }, { status: 400 });
 
@@ -48,11 +60,13 @@ export async function GET(request: Request) {
     return Response.json({ error: "Session not found" }, { status: 404 });
   }
 
-  // Update last_accessed_at
-  await db
-    .from("room_sessions")
+  // Update last_accessed_at (non-blocking)
+  db.from("room_sessions")
     .update({ last_accessed_at: new Date().toISOString() })
-    .eq("session_token", token);
+    .eq("session_token", token)
+    .then(({ error: e }) => {
+      if (e) console.error("[session] update error", e.message);
+    });
 
   return Response.json({ onboarding_data: data.onboarding_data });
 }

@@ -1,6 +1,10 @@
 import { CATALOG } from "@/lib/catalog";
 import { supabaseAdmin } from "@/lib/supabase";
+import { rateLimit, getIp, tooManyRequests } from "@/lib/rate-limit";
 import type { Product } from "@/lib/types";
+
+// 120 clicks per IP per minute — generous for browsing, blocks scrapers
+const LIMIT = { limit: 120, windowMs: 60 * 1000 };
 
 const AFFILIATE_TAGS: Record<string, string> = {
   Amazon: process.env.AFFILIATE_TAG_AMAZON ?? "",
@@ -34,21 +38,20 @@ function buildRetailerUrl(product: Product): string {
 }
 
 export async function GET(request: Request) {
+  const { ok, resetAt } = rateLimit(`click:${getIp(request)}`, LIMIT);
+  if (!ok) return tooManyRequests(resetAt);
+
   const { searchParams } = new URL(request.url);
   const sku = searchParams.get("sku");
   const option = searchParams.get("option") ?? "A";
   const sessionId = searchParams.get("sid") ?? null;
 
-  if (!sku) {
-    return new Response("Missing sku parameter", { status: 400 });
-  }
+  if (!sku) return new Response("Missing sku parameter", { status: 400 });
 
   const product = CATALOG.find((p) => p.id === sku);
-  if (!product) {
-    return new Response("Unknown SKU", { status: 400 });
-  }
+  if (!product) return new Response("Unknown SKU", { status: 400 });
 
-  // Log click to Supabase (non-blocking — don't await, let redirect happen fast)
+  // Non-blocking — let the redirect happen fast
   supabaseAdmin()
     .from("click_events")
     .insert({
@@ -62,6 +65,5 @@ export async function GET(request: Request) {
       if (error) console.error("[click] db error", error.message);
     });
 
-  const destination = buildRetailerUrl(product);
-  return Response.redirect(destination, 302);
+  return Response.redirect(buildRetailerUrl(product), 302);
 }

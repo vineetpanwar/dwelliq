@@ -1,7 +1,14 @@
 import { supabaseAdmin } from "@/lib/supabase";
 import { resend, FROM_EMAIL, buildWelcomeEmail } from "@/lib/resend";
+import { rateLimit, getIp, tooManyRequests, isValidEmail } from "@/lib/rate-limit";
+
+// 5 signups per IP per hour
+const LIMIT = { limit: 5, windowMs: 60 * 60 * 1000 };
 
 export async function POST(request: Request) {
+  const { ok, resetAt } = rateLimit(`subscribe:${getIp(request)}`, LIMIT);
+  if (!ok) return tooManyRequests(resetAt);
+
   let body: { email: string; room_data?: Record<string, unknown> };
   try {
     body = await request.json();
@@ -10,21 +17,16 @@ export async function POST(request: Request) {
   }
 
   const email = (body.email ?? "").trim().toLowerCase();
-  if (!email || !email.includes("@")) {
-    return Response.json({ error: "Invalid email" }, { status: 400 });
+  if (!email || !isValidEmail(email)) {
+    return Response.json({ error: "Invalid email address" }, { status: 400 });
   }
 
   const db = supabaseAdmin();
 
-  // Upsert: if email exists, update room_data and clear unsubscribed_at
   const { error: dbError } = await db
     .from("email_subscriptions")
     .upsert(
-      {
-        email,
-        room_data: body.room_data ?? null,
-        unsubscribed_at: null,
-      },
+      { email, room_data: body.room_data ?? null, unsubscribed_at: null },
       { onConflict: "email" }
     );
 
@@ -33,12 +35,8 @@ export async function POST(request: Request) {
     return Response.json({ error: "Could not save subscription" }, { status: 500 });
   }
 
-  // Send welcome email (non-fatal if it fails)
   try {
-    await resend.emails.send({
-      from: FROM_EMAIL,
-      ...buildWelcomeEmail(email),
-    });
+    await resend.emails.send({ from: FROM_EMAIL, ...buildWelcomeEmail(email) });
   } catch (err) {
     console.error("[subscribe] resend error", err);
   }
