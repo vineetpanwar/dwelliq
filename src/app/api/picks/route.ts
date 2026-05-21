@@ -3,6 +3,7 @@ import { retrieve } from "@/lib/engine/retrieval";
 import { RuleBasedReranker } from "@/lib/engine/reranker";
 import type { Brief, VisionFeatures } from "@/lib/engine/types";
 import type { ProductCategory } from "@/lib/types";
+import { checkCsrf } from "@/lib/csrf";
 
 interface Body {
   photo_id?: string;
@@ -17,6 +18,7 @@ interface Body {
 const reranker = new RuleBasedReranker();
 
 export async function POST(request: Request) {
+  const csrf = checkCsrf(request); if (csrf) return csrf;
   let body: Body;
   try { body = await request.json(); }
   catch { return Response.json({ error: "Invalid JSON" }, { status: 400 }); }

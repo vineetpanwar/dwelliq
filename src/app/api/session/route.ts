@@ -1,6 +1,7 @@
 import { supabaseAdmin } from "@/lib/supabase";
 import { randomUUID } from "crypto";
 import { rateLimit, getIp, tooManyRequests } from "@/lib/rate-limit";
+import { checkCsrf } from "@/lib/csrf";
 
 // POST: 20 saves per IP per hour
 const POST_LIMIT = { limit: 20, windowMs: 60 * 60 * 1000 };
@@ -8,6 +9,7 @@ const POST_LIMIT = { limit: 20, windowMs: 60 * 60 * 1000 };
 const GET_LIMIT  = { limit: 60, windowMs: 60 * 1000 };
 
 export async function POST(request: Request) {
+  const csrf = checkCsrf(request); if (csrf) return csrf;
   const { ok, resetAt } = rateLimit(`session-post:${getIp(request)}`, POST_LIMIT);
   if (!ok) return tooManyRequests(resetAt);
 

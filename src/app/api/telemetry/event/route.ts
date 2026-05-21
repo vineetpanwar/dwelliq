@@ -1,4 +1,5 @@
 import { supabaseAdmin } from "@/lib/supabase";
+import { checkCsrf } from "@/lib/csrf";
 
 const KNOWN_EVENTS = new Set([
   "vision_complete",
@@ -22,6 +23,7 @@ interface Body {
 }
 
 export async function POST(request: Request) {
+  const csrf = checkCsrf(request); if (csrf) return csrf;
   let body: Body;
   try { body = await request.json(); }
   catch { return Response.json({ error: "Invalid JSON" }, { status: 400 }); }

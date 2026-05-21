@@ -1,12 +1,14 @@
 import { supabaseAdmin } from "@/lib/supabase";
 import { runInpaint } from "@/lib/engine/inpaint";
 import type { Pick } from "@/lib/engine/types";
+import { checkCsrf } from "@/lib/csrf";
 
 interface Body { pick_set_id?: string }
 
 const BUCKET = process.env.NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET ?? "room-photos";
 
 export async function POST(request: Request) {
+  const csrf = checkCsrf(request); if (csrf) return csrf;
   let body: Body;
   try { body = await request.json(); }
   catch { return Response.json({ error: "Invalid JSON" }, { status: 400 }); }

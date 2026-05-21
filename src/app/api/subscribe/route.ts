@@ -2,11 +2,13 @@ import { supabaseAdmin } from "@/lib/supabase";
 import { resend, FROM_EMAIL, buildWelcomeEmail } from "@/lib/resend";
 import { generateUnsubscribeToken } from "@/lib/unsubscribe-token";
 import { rateLimit, getIp, tooManyRequests, isValidEmail } from "@/lib/rate-limit";
+import { checkCsrf } from "@/lib/csrf";
 
 // 5 signups per IP per hour
 const LIMIT = { limit: 5, windowMs: 60 * 60 * 1000 };
 
 export async function POST(request: Request) {
+  const csrf = checkCsrf(request); if (csrf) return csrf;
   const { ok, resetAt } = rateLimit(`subscribe:${getIp(request)}`, LIMIT);
   if (!ok) return tooManyRequests(resetAt);
 

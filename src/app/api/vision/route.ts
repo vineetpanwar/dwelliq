@@ -1,6 +1,7 @@
 import { supabaseAdmin } from "@/lib/supabase";
 import { embedImageUrl } from "@/lib/engine/embedding";
 import type { VisionFeatures, LightTemp } from "@/lib/engine/types";
+import { checkCsrf } from "@/lib/csrf";
 
 interface Body {
   photo_id?: string;
@@ -10,6 +11,7 @@ interface Body {
 }
 
 export async function POST(request: Request) {
+  const csrf = checkCsrf(request); if (csrf) return csrf;
   let body: Body;
   try { body = await request.json(); }
   catch { return Response.json({ error: "Invalid JSON" }, { status: 400 }); }
