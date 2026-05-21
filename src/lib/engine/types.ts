@@ -25,6 +25,8 @@ export interface Pick {
   rationale: string;
   match: number;
   ar_available: boolean;
+  gltf_url?: string | null;
+  usdz_url?: string | null;
   mood_url: string | null;
 }
 

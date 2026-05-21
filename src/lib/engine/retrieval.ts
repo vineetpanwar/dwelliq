@@ -47,6 +47,8 @@ interface RawCatalogRow {
   is_local: boolean;
   local_distance: number | null;
   quality_tier: "budget" | "mid" | "premium" | null;
+  gltf_url: string | null;
+  usdz_url: string | null;
   similarity: number;
 }
 
@@ -65,5 +67,7 @@ function rowToProduct(r: RawCatalogRow): Product {
     isLocal: r.is_local,
     localDistance: r.local_distance ?? undefined,
     qualityTier: r.quality_tier ?? "mid",
+    gltf_url: r.gltf_url ?? null,
+    usdz_url: r.usdz_url ?? null,
   };
 }

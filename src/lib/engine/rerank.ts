@@ -72,7 +72,9 @@ export class ClaudeSonnetReranker implements Reranker {
         product: cand.product,
         rationale: p.rationale,
         match: Math.round(p.match),
-        ar_available: false,
+        ar_available: !!cand.product.gltf_url || !!cand.product.usdz_url,
+        gltf_url: cand.product.gltf_url ?? null,
+        usdz_url: cand.product.usdz_url ?? null,
         mood_url: null,
       };
     });
@@ -84,7 +86,10 @@ export class ClaudeSonnetReranker implements Reranker {
       picks.push({
         role, sku: fallback.sku, product: fallback.product,
         rationale: "Style match", match: Math.round(fallback.similarity * 100),
-        ar_available: false, mood_url: null,
+        ar_available: !!fallback.product.gltf_url || !!fallback.product.usdz_url,
+        gltf_url: fallback.product.gltf_url ?? null,
+        usdz_url: fallback.product.usdz_url ?? null,
+        mood_url: null,
       });
     }
 

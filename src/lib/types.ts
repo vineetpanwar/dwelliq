@@ -50,6 +50,8 @@ export interface Product {
   localDistance?: number;
   qualityTier?: "budget" | "mid" | "premium";
   explanation?: string;
+  gltf_url?: string | null;
+  usdz_url?: string | null;
 }
 
 export interface RecommendationSet {

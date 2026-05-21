@@ -74,7 +74,9 @@ function toPick(role: "A" | "B" | "C", c: Candidate, budget: number, kind: "in-b
     product: c.product,
     rationale: rationale(c.product, budget, kind),
     match: Math.round(c.similarity * 100),
-    ar_available: false,                // wired in Plan 3 via catalog.gltf_url
+    ar_available: !!c.product.gltf_url || !!c.product.usdz_url,
+    gltf_url: c.product.gltf_url ?? null,
+    usdz_url: c.product.usdz_url ?? null,
     mood_url: null,                     // populated by /api/inpaint stub
   };
 }
