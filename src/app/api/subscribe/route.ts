@@ -1,5 +1,6 @@
 import { supabaseAdmin } from "@/lib/supabase";
 import { resend, FROM_EMAIL, buildWelcomeEmail } from "@/lib/resend";
+import { generateUnsubscribeToken } from "@/lib/unsubscribe-token";
 import { rateLimit, getIp, tooManyRequests, isValidEmail } from "@/lib/rate-limit";
 
 // 5 signups per IP per hour
@@ -36,7 +37,9 @@ export async function POST(request: Request) {
   }
 
   try {
-    await resend.emails.send({ from: FROM_EMAIL, ...buildWelcomeEmail(email) });
+    const token = generateUnsubscribeToken(email);
+    const unsubscribeUrl = `https://dwelliq-ten.vercel.app/api/unsubscribe?token=${token}`;
+    await resend.emails.send({ from: FROM_EMAIL, ...buildWelcomeEmail(email, unsubscribeUrl) });
   } catch (err) {
     console.error("[subscribe] resend error", err);
   }
