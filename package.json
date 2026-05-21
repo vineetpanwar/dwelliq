@@ -12,7 +12,8 @@
     "test:coverage": "vitest run --coverage",
     "db:migrate": "tsx scripts/run-migration.ts",
     "db:seed-catalog": "tsx scripts/migrate-catalog-to-db.ts",
-    "db:backfill-embeddings": "tsx scripts/backfill-stub-embeddings.ts"
+    "db:backfill-embeddings": "tsx scripts/backfill-stub-embeddings.ts",
+    "sync": "tsx scripts/sync-catalog.ts"
   },
   "dependencies": {
     "@react-three/drei": "^10.7.7",
