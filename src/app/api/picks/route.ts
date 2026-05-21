@@ -1,8 +1,9 @@
 import { supabaseAdmin } from "@/lib/supabase";
 import { retrieve } from "@/lib/engine/retrieval";
+import { getReranker } from "@/lib/engine/rerank";
 import { RuleBasedReranker } from "@/lib/engine/reranker";
 import { NoopAvailabilityChecker, type AvailabilityChecker } from "@/lib/engine/availability";
-import type { Brief, VisionFeatures } from "@/lib/engine/types";
+import type { Brief, VisionFeatures, PickSet } from "@/lib/engine/types";
 import type { ProductCategory } from "@/lib/types";
 import { checkCsrf } from "@/lib/csrf";
 
@@ -16,7 +17,7 @@ interface Body {
   user_id?: string;
 }
 
-const reranker = new RuleBasedReranker();
+const reranker = getReranker();
 const checker: AvailabilityChecker = new NoopAvailabilityChecker();
 
 export async function POST(request: Request) {
@@ -62,12 +63,25 @@ export async function POST(request: Request) {
   }
 
   // 3. Rerank.
-  const pickSet = await reranker.rerank({
-    photo_id: body.photo_id,
-    features,
-    candidates,
-    brief,
-  });
+  let rerankFallback = false;
+  let pickSet: PickSet;
+  try {
+    pickSet = await reranker.rerank({
+      photo_id: body.photo_id,
+      features,
+      candidates,
+      brief,
+    });
+  } catch (err) {
+    console.warn("[picks] primary rerank failed, using rule-based fallback:", (err as Error).message);
+    rerankFallback = true;
+    pickSet = await new RuleBasedReranker().rerank({
+      photo_id: body.photo_id,
+      features,
+      candidates,
+      brief,
+    });
+  }
 
   // 4. Verify availability and top up from next candidate if needed.
   const { unavailable } = await checker.verify(pickSet.picks);
@@ -107,6 +121,7 @@ export async function POST(request: Request) {
     swipe_path: [],
     inpaint_seen: [],
     filter_changes: [],
+    rerank_fallback: rerankFallback,
   }, { onConflict: "pick_set_id" });
   if (telErr) {
     console.warn("[picks] telemetry shell write failed:", telErr.message);
