@@ -67,3 +67,21 @@ E2E_BASE_URL=http://localhost:3000 npx vitest run tests/e2e/happy-path.test.ts
 ```
 
 The implementation plan and design spec live alongside this repo (see the parent workspace `docs/superpowers/{specs,plans}/`).
+
+## Catalog Sync (Plan 2.5)
+
+A background sync job populates the `catalog` table from Walmart I/O + eBay Browse APIs every hour. The user-facing `/api/picks` route always queries the local DB — never the live APIs directly.
+
+**Local manual run:**
+```bash
+npm run sync
+```
+
+**Production:** Vercel Cron triggers `GET /api/cron/sync-catalog` at minute 0 of every hour. Set these env vars in the Vercel project:
+
+- `WALMART_CONSUMER_ID`, `WALMART_PRIVATE_KEY` (from walmart.io/registration → Affiliate)
+- `EBAY_CLIENT_ID`, `EBAY_CLIENT_SECRET` (from developer.ebay.com → app keys)
+- `CRON_SECRET` (any long random string; Vercel uses it to sign cron requests)
+- `SYNC_DEFAULT_ZIP` (e.g. `10003` — used by Walmart's zip-aware pricing)
+
+After deploy, the catalog table grows automatically from the live APIs while hand-curated rows (those with `is_curated=true`) are never overwritten by sync.
