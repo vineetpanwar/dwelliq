@@ -17,7 +17,7 @@ export interface PresignedUpload {
 export async function presignedUploadUrl(): Promise<PresignedUpload> {
   const photo_id = randomUUID();
   const path = `uploads/${photo_id}.jpg`;
-  const { data, error } = await supabaseAdmin()
+  const { data, error } = await supabaseAdmin
     .storage.from(BUCKET)
     .createSignedUploadUrl(path);
 

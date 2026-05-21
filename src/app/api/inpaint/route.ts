@@ -15,7 +15,7 @@ export async function POST(request: Request) {
     return Response.json({ error: "Missing pick_set_id" }, { status: 400 });
   }
 
-  const db = supabaseAdmin();
+  const db = supabaseAdmin;
 
   const { data: row, error } = await db.from("picks")
     .select("id, photo_id, results")

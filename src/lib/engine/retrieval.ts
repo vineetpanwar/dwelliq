@@ -11,7 +11,7 @@ import type { Product, ProductCategory } from "@/lib/types";
  * for the create statement (Task 7 adds it as a follow-up migration).
  */
 export async function retrieve(features: VisionFeatures, brief: Brief, k = 30): Promise<Candidate[]> {
-  const db = supabaseAdmin();
+  const db = supabaseAdmin;
 
   const { data, error } = await db.rpc("match_catalog", {
     query_embedding: features.clip_embedding,

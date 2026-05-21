@@ -25,7 +25,7 @@ export async function POST(request: Request) {
     return Response.json({ error: "Missing photo_id or query" }, { status: 400 });
   }
 
-  const db = supabaseAdmin();
+  const db = supabaseAdmin;
 
   // 1. Load VisionFeatures for this photo.
   const { data: vf, error: vfErr } = await db

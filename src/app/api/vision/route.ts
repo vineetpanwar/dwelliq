@@ -20,7 +20,7 @@ export async function POST(request: Request) {
 
   const features = await buildStubFeatures(body);
 
-  const db = supabaseAdmin();
+  const db = supabaseAdmin;
   const { error } = await db.from("vision_features").upsert({
     photo_id: features.photo_id,
     session_id: body.session_id ?? null,

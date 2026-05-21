@@ -52,7 +52,7 @@ export async function GET(request: Request) {
   if (!product) return new Response("Unknown SKU", { status: 400 });
 
   // Non-blocking — let the redirect happen fast
-  supabaseAdmin()
+  supabaseAdmin
     .from("click_events")
     .insert({
       sku,

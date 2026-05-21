@@ -14,7 +14,7 @@ export async function GET(request: Request) {
     return NextResponse.redirect(`${BASE}/unsubscribe?status=invalid`);
   }
 
-  const { error } = await supabaseAdmin()
+  const { error } = await supabaseAdmin
     .from("email_subscriptions")
     .update({ unsubscribed_at: new Date().toISOString() })
     .eq("email", email);
@@ -33,7 +33,7 @@ export async function POST(request: Request) {
 
   if (!email) return new Response("Invalid token", { status: 400 });
 
-  const { error } = await supabaseAdmin()
+  const { error } = await supabaseAdmin
     .from("email_subscriptions")
     .update({ unsubscribed_at: new Date().toISOString() })
     .eq("email", email);

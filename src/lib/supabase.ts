@@ -5,10 +5,8 @@ const key = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
 
 export const supabase = createClient(url, key);
 
-// Server-side client using service role key (bypasses RLS — only for API routes)
-export function supabaseAdmin() {
-  return createClient(url, process.env.SUPABASE_SERVICE_ROLE_KEY!);
-}
+// Server-side singleton using service role key (bypasses RLS — only for API routes)
+export const supabaseAdmin = createClient(url, process.env.SUPABASE_SERVICE_ROLE_KEY!);
 
 export type EmailSubscription = {
   id: string;

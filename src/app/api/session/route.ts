@@ -22,7 +22,7 @@ export async function POST(request: Request) {
     return Response.json({ error: "Missing onboarding_data" }, { status: 400 });
   }
 
-  const db = supabaseAdmin();
+  const db = supabaseAdmin;
   const token = body.session_token ?? randomUUID();
 
   const { error } = await db.from("room_sessions").upsert(
@@ -49,7 +49,7 @@ export async function GET(request: Request) {
   const token = new URL(request.url).searchParams.get("token");
   if (!token) return Response.json({ error: "Missing token" }, { status: 400 });
 
-  const db = supabaseAdmin();
+  const db = supabaseAdmin;
   const { data, error } = await db
     .from("room_sessions")
     .select("onboarding_data, last_accessed_at")

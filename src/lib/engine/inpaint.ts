@@ -98,7 +98,7 @@ async function fetchAsBase64(url: string): Promise<{ data: string; mimeType: str
 }
 
 async function uploadAndSign(bytes: Buffer, role: string): Promise<string> {
-  const db = supabaseAdmin();
+  const db = supabaseAdmin;
   const path = `mood/${crypto.randomUUID()}-${role}.jpg`;
   const { error: upErr } = await db.storage.from(BUCKET).upload(path, bytes, {
     contentType: "image/jpeg",

@@ -22,7 +22,7 @@ export async function POST(request: Request) {
     return Response.json({ error: "Invalid email address" }, { status: 400 });
   }
 
-  const db = supabaseAdmin();
+  const db = supabaseAdmin;
 
   const { error: dbError } = await db
     .from("email_subscriptions")

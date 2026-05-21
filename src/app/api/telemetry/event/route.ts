@@ -30,7 +30,7 @@ export async function POST(request: Request) {
     return Response.json({ error: "Missing or unknown event" }, { status: 400 });
   }
 
-  const db = supabaseAdmin();
+  const db = supabaseAdmin;
   const { data: cur, error: readErr } = await db
     .from("telemetry_pairs").select("*").eq("pick_set_id", body.pick_set_id).single();
   if (readErr || !cur) {

@@ -7,7 +7,7 @@ export async function GET(_req: Request, ctx: Ctx) {
   const { id } = await ctx.params;
   if (!id) return Response.json({ error: "Missing id" }, { status: 400 });
 
-  const db = supabaseAdmin();
+  const db = supabaseAdmin;
   const { data, error } = await db.from("picks")
     .select("id, brief, results, mood_a_url, mood_b_url, mood_c_url, created_at")
     .eq("id", id).single();
