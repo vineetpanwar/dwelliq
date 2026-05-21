@@ -29,6 +29,21 @@ export const metadata: Metadata = {
     title: "Dwelliq — AI Home Styling Advisor",
     description: "Make your home look intentionally designed, not assembled.",
     type: "website",
+    url: "https://dwelliq-ten.vercel.app",
+    images: [
+      {
+        url: "/opengraph-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Dwelliq — AI Home Styling Advisor",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Dwelliq — AI Home Styling Advisor",
+    description: "Make your home look intentionally designed, not assembled.",
+    images: ["/opengraph-image.png"],
   },
 };
 
