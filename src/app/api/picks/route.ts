@@ -2,7 +2,7 @@ import { supabaseAdmin } from "@/lib/supabase";
 import { retrieve } from "@/lib/engine/retrieval";
 import { getReranker } from "@/lib/engine/rerank";
 import { RuleBasedReranker } from "@/lib/engine/reranker";
-import { NoopAvailabilityChecker, type AvailabilityChecker } from "@/lib/engine/availability";
+import { getAvailabilityChecker } from "@/lib/engine/live-availability";
 import type { Brief, VisionFeatures, PickSet } from "@/lib/engine/types";
 import type { ProductCategory } from "@/lib/types";
 import { checkCsrf } from "@/lib/csrf";
@@ -18,7 +18,7 @@ interface Body {
 }
 
 const reranker = getReranker();
-const checker: AvailabilityChecker = new NoopAvailabilityChecker();
+const checker = getAvailabilityChecker();
 
 export async function POST(request: Request) {
   const csrf = checkCsrf(request); if (csrf) return csrf;
