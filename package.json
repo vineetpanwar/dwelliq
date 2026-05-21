@@ -16,8 +16,10 @@
     "sync": "tsx scripts/sync-catalog.ts"
   },
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.97.1",
     "@react-three/drei": "^10.7.7",
     "@react-three/fiber": "^9.6.1",
+    "@sentry/nextjs": "^10.53.1",
     "@supabase/supabase-js": "^2.105.4",
     "@types/three": "^0.184.1",
     "framer-motion": "^12.38.0",
