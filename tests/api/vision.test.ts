@@ -1,11 +1,11 @@
 import { describe, it, expect, vi } from "vitest";
 
 vi.mock("@/lib/supabase", () => ({
-  supabaseAdmin: () => ({
+  supabaseAdmin: {
     from: () => ({
       upsert: vi.fn(async () => ({ error: null })),
     }),
-  }),
+  },
 }));
 
 const { POST } = await import("@/app/api/vision/route");

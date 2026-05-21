@@ -103,7 +103,7 @@ export class ClaudeSonnetReranker implements Reranker {
 
   private async resolvePhotoUrl(photoId: string): Promise<string> {
     const bucket = process.env.NEXT_PUBLIC_SUPABASE_STORAGE_BUCKET ?? "room-photos";
-    const { data, error } = await supabaseAdmin().storage
+    const { data, error } = await supabaseAdmin.storage
       .from(bucket)
       .createSignedUrl(`uploads/${photoId}.jpg`, 60 * 10);
     if (error || !data) throw new Error(`Couldn't sign photo URL: ${error?.message}`);

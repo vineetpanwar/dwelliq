@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from "vitest";
 
 const updateMock = vi.fn(async () => ({ error: null }));
 vi.mock("@/lib/supabase", () => ({
-  supabaseAdmin: () => ({
+  supabaseAdmin: {
     from: () => ({
       select: () => ({ eq: () => ({ single: async () => ({
         data: { id: "ps1", photo_id: "ph1", results: [
@@ -20,7 +20,7 @@ vi.mock("@/lib/supabase", () => ({
         createSignedUrl: async () => ({ data: { signedUrl: "https://photo.jpg?token=stub" }, error: null }),
       }),
     },
-  }),
+  },
 }));
 
 const { POST } = await import("@/app/api/inpaint/route");

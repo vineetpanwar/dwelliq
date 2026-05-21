@@ -22,7 +22,7 @@ vi.mock("@/lib/engine/availability", () => ({
 }));
 
 vi.mock("@/lib/supabase", () => ({
-  supabaseAdmin: () => ({
+  supabaseAdmin: {
     from: () => ({
       select: () => ({ eq: () => ({ single: async () => ({ data: {
         photo_id: "ph1", bbox: [0,0,100,100], palette: [], light_temp: "warm",
@@ -31,7 +31,7 @@ vi.mock("@/lib/supabase", () => ({
       insert: vi.fn(async () => ({ error: null })),
       upsert: vi.fn(async () => ({ error: null })),
     }),
-  }),
+  },
 }));
 
 const { POST } = await import("@/app/api/picks/route");

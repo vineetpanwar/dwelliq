@@ -8,11 +8,11 @@ vi.mock("@anthropic-ai/sdk", () => ({
 }));
 
 vi.mock("@/lib/supabase", () => ({
-  supabaseAdmin: () => ({
+  supabaseAdmin: {
     storage: { from: () => ({
       createSignedUrl: vi.fn(async () => ({ data: { signedUrl: "https://signed/photo.jpg" }, error: null })),
     }) },
-  }),
+  },
 }));
 
 import { ClaudeSonnetReranker, getReranker, _resetRerankerCache } from "@/lib/engine/rerank";

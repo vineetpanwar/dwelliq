@@ -23,7 +23,7 @@ export class CatalogSyncer {
   async run(): Promise<SyncResult> {
     const out: SyncResult = { fetched: 0, upserted: 0, errors: [] };
     const embed = this.opts.embedder ?? stubEmbedFromImageUrl;
-    const db = supabaseAdmin();
+    const db = supabaseAdmin;
 
     for (const source of this.opts.sources) {
       for (const category of this.opts.categories) {

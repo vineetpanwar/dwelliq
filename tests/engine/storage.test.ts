@@ -2,7 +2,7 @@ import { describe, it, expect, vi } from "vitest";
 import { presignedUploadUrl } from "@/lib/engine/storage";
 
 vi.mock("@/lib/supabase", () => ({
-  supabaseAdmin: () => ({
+  supabaseAdmin: {
     storage: {
       from: () => ({
         createSignedUploadUrl: vi.fn(async (path: string) => ({
@@ -11,7 +11,7 @@ vi.mock("@/lib/supabase", () => ({
         })),
       }),
     },
-  }),
+  },
 }));
 
 describe("presignedUploadUrl", () => {

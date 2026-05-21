@@ -9,12 +9,12 @@ const selectSingle = vi.fn(async () => ({ data: {
 }, error: null }));
 
 vi.mock("@/lib/supabase", () => ({
-  supabaseAdmin: () => ({
+  supabaseAdmin: {
     from: () => ({
       select: () => ({ eq: () => ({ single: selectSingle }) }),
       update: () => ({ eq: updateMock }),
     }),
-  }),
+  },
 }));
 
 const { POST } = await import("@/app/api/telemetry/event/route");

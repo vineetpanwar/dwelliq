@@ -4,7 +4,7 @@ import type { Brief, VisionFeatures } from "@/lib/engine/types";
 
 // Mock the supabase admin client.
 vi.mock("@/lib/supabase", () => ({
-  supabaseAdmin: () => ({
+  supabaseAdmin: {
     rpc: vi.fn(async () => ({
       data: [
         { id: "sofa-001", name: "Rivet", category: "sofa", retailer: "Amazon",
@@ -18,7 +18,7 @@ vi.mock("@/lib/supabase", () => ({
       ],
       error: null,
     })),
-  }),
+  },
 }));
 
 const features: VisionFeatures = {

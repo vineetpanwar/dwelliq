@@ -11,9 +11,9 @@ class FakeSource implements CatalogSource {
 
 const upsertMock = vi.fn(async () => ({ error: null }));
 vi.mock("@/lib/supabase", () => ({
-  supabaseAdmin: () => ({
+  supabaseAdmin: {
     from: () => ({ upsert: upsertMock }),
-  }),
+  },
 }));
 
 const sampleProduct = (id: string): RemoteProduct => ({

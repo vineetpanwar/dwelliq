@@ -1,7 +1,7 @@
 import { describe, it, expect, vi } from "vitest";
 
 vi.mock("@/lib/supabase", () => ({
-  supabaseAdmin: () => ({
+  supabaseAdmin: {
     from: () => ({
       select: () => ({ eq: () => ({ single: async () => ({
         data: {
@@ -18,7 +18,7 @@ vi.mock("@/lib/supabase", () => ({
         error: null,
       }) }) }),
     }),
-  }),
+  },
 }));
 
 const { GET } = await import("@/app/api/picks/[id]/route");
